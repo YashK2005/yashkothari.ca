@@ -1,0 +1,25 @@
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh; /* This makes the hero section take up the full viewport height */
+    font-family: 'Oooh Baby', sans-serif; /* Replace with the actual font if it's different */
+    color: #FFFFFF; /* Assuming you want white text */
+    text-align: center;
+    
+  }
+  
+  .hero h1 {
+    font-size: 13vw; /* This will scale the size of the font based on the width of the viewport */
+    max-font-size: 212px; /* You can set a max size if you wish */
+    margin: 0;
+    padding-top: 10vh; /* Adjust the padding to suit your design */
+  }
+  
+  .hero img {
+    width: 100%; /* This will make the image take up the full width of the screen */
+    bottom: 0;
+    position: absolute; /* Position it at the bottom */
+  }
+  

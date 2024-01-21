@@ -1,0 +1,44 @@
+.scroll-down-button {
+    position: absolute;
+    bottom: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .scroll-down-button svg {
+    height: 60px; /* Make the button bigger */
+    width: 60px;
+    transition: fill 0.3s ease;
+  }
+  
+  .scroll-down-button:hover {
+    transform: translateX(-50%) scale(1.1); /* Slightly enlarge the button on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+  }
+  
+  .scroll-down-button svg:hover circle {
+    fill: #f0f0f0; /* Lighten the circle color on hover */
+  }
+  
+  .scroll-down-button svg:hover path {
+    stroke: #333; /* Change the arrow color on hover */
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  .scroll-down-button:hover svg path {
+    animation: bounce 1s infinite;
+  }
+  
