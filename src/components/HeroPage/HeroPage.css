@@ -21,5 +21,6 @@
     width: 100%; /* This will make the image take up the full width of the screen */
     bottom: 0;
     position: absolute; /* Position it at the bottom */
+    z-index: -1; /* Make sure it's behind the text */
   }
   

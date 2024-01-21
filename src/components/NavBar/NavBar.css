@@ -2,10 +2,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10 40px;
+    padding: 10 0px;
     
     background-color: transparent; /* Or any color you want for the navbar background */
     font-family: 'Outfit', sans-serif; /* Using the 'Outfit' font family */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Ensure it spans the full width */
+    z-index: 100; /* Make sure it's above other content */
+    /* ... other styles ... */
+    
+    z-index: 100; /* Make sure it's above other content */
+
   }
   
   .navbar a, .navbar a:visited {
@@ -18,9 +27,17 @@
   
   /* Styling for the name on the top left */
   .navbar a#name {
-    color: #DE8BE6; /* Pink text color as requested */
+    /*color: #DE8BE6;*/ /* Pink text color as requested */
     font-size: 30px; /* Font size as requested */
   }
+
+  .navbar a.active {
+    color: #DE8BE6; /* Pink text color as requested */
+    
+    }
+ .navbar a.inactive {
+    color: white; /* White color */
+    } 
   
   /* Styling for the rest of the navbar items */
   .navbar a:not(#name) {
@@ -28,8 +45,25 @@
   }
   
   /* Hover effect for all navbar items */
-  .navbar a:hover {
-    color: #DE8BE6; /* Text color changes to black on hover */
+  .navbar a:not(.active):hover{
+   /* color: #DE8BE6;*/ /* Text color changes to black on hover */
     transition: color 0.3s; /* Smooth transition for color change */
+    font-weight: bold;
+    text-decoration: underline;
+    
   }
+
+  .social-icon {
+    
+    height: 40px; /* Set the desired height */
+    width: 40px;
+    margin-left: 5px; /* Add margin to space them from the text */
+  }
+
+  .social-icon:hover {
+    transform: scale(1.2); /* Slightly enlarge the icon on hover */
+    transition: transform 0.3s ease; /* Add a smooth transition */
+  }
+
+  
   
