@@ -1,0 +1,35 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10 40px;
+    
+    background-color: transparent; /* Or any color you want for the navbar background */
+    font-family: 'Outfit', sans-serif; /* Using the 'Outfit' font family */
+  }
+  
+  .navbar a, .navbar a:visited {
+    color: white; /* Default text color for the links */
+    text-decoration: none; /* Removes the underline from links */
+    font-weight: bold; /* Bold font weight as requested */
+    margin: 10px;
+    
+  }
+  
+  /* Styling for the name on the top left */
+  .navbar a#name {
+    color: #DE8BE6; /* Pink text color as requested */
+    font-size: 30px; /* Font size as requested */
+  }
+  
+  /* Styling for the rest of the navbar items */
+  .navbar a:not(#name) {
+    font-size: 20px; /* Font size for the other navbar items */
+  }
+  
+  /* Hover effect for all navbar items */
+  .navbar a:hover {
+    color: #DE8BE6; /* Text color changes to black on hover */
+    transition: color 0.3s; /* Smooth transition for color change */
+  }
+  
