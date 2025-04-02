@@ -43,7 +43,15 @@ export function ExperienceItem({
         </div>
       </div>
       <div className="space-y-4">
-        <p className="text-white/80" dangerouslySetInnerHTML={{ __html: description }} />
+        <p 
+          className="text-white/80" 
+          dangerouslySetInnerHTML={{ 
+            __html: description.replace(
+              /<a/g, 
+              '<a class="link-highlight"'
+            ) 
+          }} 
+        />
       </div>
     </div>
   )
