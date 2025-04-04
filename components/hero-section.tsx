@@ -55,14 +55,6 @@ export function HeroSection({
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="rounded-full border-white text-white hover:bg-white/10"
-            >
-              <Link href="#contact">Contact</Link>
-            </Button>
           </div>
         </div>
       </div>

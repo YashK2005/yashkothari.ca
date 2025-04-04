@@ -8,7 +8,7 @@ const experiences: ExperienceItemProps[] = [
     year: "2025",
     title: "Software Engineering Intern",
     company: "Shopify",
-    description: "Working in Shopify's Security org. Kickstarted an AI-powered threat intelligence platform leveraging semantic search and RAG. Won an internal company hackathon."
+    description: 'Working in <a href="https://www.shopify.com/ca" target="_blank" rel="noopener noreferrer" className="link-highlight">Shopify</a>\'s Security org. Kickstarted an AI-powered threat intelligence platform leveraging semantic search and RAG. Won an internal company hackathon.'
   },
   {
     logo: "/nest-logo.webp",

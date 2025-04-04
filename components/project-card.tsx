@@ -1,10 +1,12 @@
 "use client"
 
+import React from 'react'
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, ExternalLink, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { useFadeIn } from "@/hooks/useFadeIn"
 
 export interface ProjectCardProps {
   title: string
@@ -25,8 +27,13 @@ export function ProjectCard({
   demoUrl,
   demoLabel = "Demo" 
 }: ProjectCardProps) {
+  const fadeRef = useFadeIn()
+  
   return (
-    <Card className="bg-white/5 border-white/10 overflow-hidden group">
+    <Card 
+      ref={fadeRef}
+      className="bg-white/5 border-white/10 overflow-hidden group fade-in gradient-border-card"
+    >
       <div className="relative aspect-video overflow-hidden">
         {isVideo ? (
           <video
