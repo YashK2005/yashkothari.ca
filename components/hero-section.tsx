@@ -8,7 +8,7 @@ import personalInfo from "@/data/personal-info"
 
 export interface HeroSectionProps {
   name?: string
-  tagline?: string
+  tagline?: string[]
 }
 
 export function HeroSection({ 
@@ -39,9 +39,15 @@ export function HeroSection({
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
             <span className="text-blue-400">Yash Kothari</span> 
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed">
-            {tagline}
-          </p>
+          <div className="mb-8 max-w-2xl space-y-3">
+            {tagline.map((paragraph, index) => (
+              <p 
+                key={`tagline-${index}`}
+                className="text-xl md:text-2xl text-white/80 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: paragraph }}
+              />
+            ))}
+          </div>
           <div className="flex gap-4">
             <Button asChild size="lg" className="rounded-full group bg-white text-deep-blue hover:bg-white/90">
               <Link href="#experience" className="flex items-center">
