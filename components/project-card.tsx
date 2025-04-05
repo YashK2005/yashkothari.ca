@@ -43,6 +43,8 @@ export function ProjectCard({
             loop
             muted
             playsInline
+            poster={imageUrl.replace('.mp4', '-poster.jpg')}
+            preload="auto"
           />
         ) : (
           <Image
