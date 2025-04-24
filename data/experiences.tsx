@@ -8,14 +8,14 @@ const experiences: ExperienceItemProps[] = [
     year: "2025",
     title: "Software Engineering Intern",
     company: "Shopify",
-    description: 'Working in <a href="https://www.shopify.com/ca" target="_blank" rel="noopener noreferrer" className="link-highlight">Shopify</a>\'s Security org. Kickstarted an AI-powered threat intelligence platform leveraging semantic search and RAG. Won an internal company hackathon.'
+    description: 'Working in <a href="https://www.shopify.com/ca" target="_blank" rel="noopener noreferrer" className="link-highlight">Shopify</a>\'s Security org. Led development of an AI-powered security intelligence platform with semantic searching and RAG features. Built and deployed an MCP server. Won an internal company hackathon.'
   },
   {
     logo: "/nest-logo.webp",
     year: "2024",
     title: "Software Engineering Intern",
     company: "Nest Wallet",
-    description: 'Building the <a href="https://nestwallet.xyz/" target="_blank" rel="noopener noreferrer" className="link-highlight">best self-custodial wallet</a> for crypto traders. Integrated support for trading over 8 million tokens over multiple chains. Also developed onboarding, localization, and NFT transfer features.'
+    description: 'Building the <a href="https://nestwallet.xyz/" target="_blank" rel="noopener noreferrer" className="link-highlight">best self-custodial wallet</a> for crypto traders. Integrated support for trading over 8 million tokens across multiple chains. Also developed onboarding, localization, and NFT transfer features.'
   },
   {
     logo: "/lockin-logo.webp",
