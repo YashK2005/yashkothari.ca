@@ -28,7 +28,7 @@ const projects: ProjectCardProps[] = [
     isVideo: false,
     githubUrl: "https://github.com/YashK2005/nbaContractPredictor",
     demoUrl: "https://nbacontractpredictor.onrender.com/",
-    demoLabel: "Wesbite"
+    demoLabel: "Website"
   }
 ];
 
