@@ -4,6 +4,13 @@ import { ExperienceItemProps } from '@/components/experience-item'
 
 const experiences: ExperienceItemProps[] = [
   {
+    logo: "/seatgeek-logo.webp",
+    year: "2025",
+    title: "Software Engineering Intern",
+    company: "SeatGeek",
+    description: 'Catalog Team at <a href="https://www.seatgeek.com/" target="_blank" rel="noopener noreferrer" className="link-highlight">SeatGeek</a>. Watching baseball games and broadway shows in NYC!'
+  },
+  {
     logo: "/shopify-logo.webp",
     year: "2025",
     title: "Software Engineering Intern",
