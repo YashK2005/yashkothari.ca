@@ -13,6 +13,15 @@ const projects: ProjectCardProps[] = [
     demoLabel: "Download"
   },
   {
+    title: "Leukemia & Lymphoma Society",
+    description: "Contributing to a team of engineers and designers to build a platform for matching cancer patients with volunteers.",
+    imageUrl: "/blueprint.jpg",
+    isVideo: false,
+    githubUrl: "https://github.com/uwblueprint/llsc",
+    demoUrl: "https://uwblueprint.org/",
+    demoLabel: "Website"
+  },
+  {
     title: "LeResume",
     description: "Using AI to create optimized resumes and cover letters tailored to each job posting.",
     imageUrl: "/leresume.mp4",
@@ -29,6 +38,13 @@ const projects: ProjectCardProps[] = [
     githubUrl: "https://github.com/YashK2005/nbaContractPredictor",
     demoUrl: "https://nbacontractpredictor.onrender.com/",
     demoLabel: "Website"
+  },
+  {
+    title: "ShoPacks",
+    description: "Shopify Internal Hackathon Winner - Built a mini that gamifies e-commerce by turning Shop App products into collectible trading cards.",
+    imageUrl: "/shopify-hackathon.png",
+    isVideo: false,
+    githubUrl: "https://github.com/YashK2005/shoPacks",
   }
 ];
 
