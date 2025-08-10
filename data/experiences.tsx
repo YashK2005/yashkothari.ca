@@ -8,7 +8,7 @@ const experiences: ExperienceItemProps[] = [
     year: "2025",
     title: "Software Engineering Intern",
     company: "SeatGeek",
-    description: 'Catalog Team at <a href="https://www.seatgeek.com/" target="_blank" rel="noopener noreferrer" className="link-highlight">SeatGeek</a>. Watching baseball games and broadway shows in NYC!'
+    description: 'Catalog Team at <a href="https://www.seatgeek.com/" target="_blank" rel="noopener noreferrer" className="link-highlight">SeatGeek</a>. Watching baseball games and broadway shows in NYC! Also building tooling to scale Seat Perks to more venues and events.'
   },
   {
     logo: "/shopify-logo.webp",
