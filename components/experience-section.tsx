@@ -27,6 +27,7 @@ export function ExperienceSection({
               title={exp.title}
               company={exp.company}
               description={exp.description}
+              companyUrl={exp.companyUrl}
             />
           ))}
         </div>
