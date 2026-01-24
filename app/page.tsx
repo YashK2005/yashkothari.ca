@@ -43,11 +43,11 @@ export default function Home() {
               <span className="text-[#3b82f6]">whoami</span>
             </p>
             <p className="pl-4 border-l-2 border-[#1f1f1f]">
-              Building CDN infrastructure at{" "}
+              I'm currently building CDN Infrastructure at{" "}
               <Link href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#3b82f6] transition-colors border-b border-[#333] hover:border-[#3b82f6]">
                 Vercel
               </Link>
-              . CS at{" "}
+              {" "}and studying CS at{" "}
               <Link href="https://uwaterloo.ca" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#3b82f6] transition-colors border-b border-[#333] hover:border-[#3b82f6]">
                 Waterloo
               </Link>
