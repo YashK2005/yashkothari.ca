@@ -1,42 +1,38 @@
-import type React from "react"
-import "@/app/globals.css"
-import { Inter } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
+import type { Metadata } from "next";
+import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] })
-
-export const metadata = {
-  title: "Yash Kothari - Personal Portfolio",
-  description: "Software Engineer",
-  icons: {
-    icon: [
-      { url: '/icon.png', type: 'image/png' },
-      { url: '/favicon-96x96.png', type: 'image/png' },
-      { url: '/favicon.ico' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png', type: 'image/png' },
-    ],
+export const metadata: Metadata = {
+  title: "Yash Kothari",
+  description: "CDN Infrastructure at Vercel. Previously SeatGeek, Shopify, Nest Wallet. CS at University of Waterloo.",
+  metadataBase: new URL("https://yashkothari.ca"),
+  openGraph: {
+    title: "Yash Kothari",
+    description: "CDN Infrastructure at Vercel. Previously SeatGeek, Shopify, Nest Wallet.",
+    url: "https://yashkothari.ca",
+    siteName: "Yash Kothari",
+    locale: "en_US",
+    type: "website",
   },
-  manifest: '/site.webmanifest',
-}
+  twitter: {
+    card: "summary",
+    title: "Yash Kothari",
+    description: "CDN Infrastructure at Vercel. Previously SeatGeek, Shopify, Nest Wallet.",
+    creator: "@YashK_7",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
-  )
+  );
 }
-
-
-
-import './globals.css'
