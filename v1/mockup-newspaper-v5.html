@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Kothari Chronicle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --paper: #f4f1e8;
+      --paper-dark: #e8e4d9;
+      --ink: #1a1a1a;
+      --ink-light: #444;
+      --ink-faded: #666;
+      --accent: #8b0000;
+    }
+    
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: #d4d0c4;
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .newspaper {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: var(--paper);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.1), 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .newspaper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    /* ============ MASTHEAD ============ */
+    .masthead {
+      text-align: center;
+      padding: 24px 40px 20px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .masthead-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faded);
+      margin-bottom: 12px;
+    }
+
+    .masthead-title {
+      font-family: 'UnifrakturMaguntia', serif;
+      font-size: 5rem;
+      font-weight: 400;
+      line-height: 1;
+      margin: 8px 0;
+    }
+
+    .masthead-subtitle {
+      font-family: 'Old Standard TT', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--ink-light);
+      letter-spacing: 0.2em;
+      margin-top: 8px;
+    }
+
+    .masthead-rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .masthead-rule::before,
+    .masthead-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--ink);
+    }
+
+    .masthead-date {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ============ SECTION NAV ============ */
+    .section-nav {
+      display: flex;
+      justify-content: center;
+      border-bottom: 3px double var(--ink);
+      background: var(--paper-dark);
+    }
+
+    .section-nav a {
+      padding: 12px 24px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink);
+      text-decoration: none;
+      border-right: 1px solid var(--ink-faded);
+      transition: background 0.2s;
+    }
+
+    .section-nav a:last-child { border-right: none; }
+    .section-nav a:hover { background: var(--paper); color: var(--accent); }
+
+    .page-num {
+      font-family: 'Old Standard TT', serif;
+      font-size: 0.6rem;
+      color: var(--ink-faded);
+      margin-left: 6px;
+    }
+
+    /* ============ HERO FRONT PAGE ============ */
+    .front-page {
+      padding: 40px;
+      border-bottom: 3px double var(--ink);
+      min-height: 700px;
+      position: relative;
+    }
+
+    .hero-kicker {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero-headline {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr 200px;
+      gap: 24px;
+      position: relative;
+    }
+
+    .hero-left-col {
+      font-size: 0.9rem;
+      text-align: justify;
+      border-right: 1px solid var(--ink-faded);
+      padding-right: 20px;
+    }
+
+    .hero-left-col p {
+      margin-bottom: 16px;
+    }
+
+    .hero-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* MacBook SVG */
+    .laptop-container {
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+    }
+
+    .laptop-svg {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2));
+    }
+
+    .laptop-screen {
+      position: absolute;
+      top: 6%;
+      left: 11.5%;
+      width: 77%;
+      height: 63%;
+      background: linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 100%);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .screen-content {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      color: #4ade80;
+      padding: 12px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .screen-content .prompt {
+      color: #60a5fa;
+    }
+
+    .screen-content .comment {
+      color: #666;
+    }
+
+    .screen-initials {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 0 40px rgba(74, 222, 128, 0.5);
+    }
+
+    .hero-caption {
+      text-align: center;
+      font-size: 0.7rem;
+      font-style: italic;
+      color: var(--ink-faded);
+      margin-top: 16px;
+    }
+
+    .hero-right-col {
+      font-size: 0.9rem;
+      text-align: justify;
+      border-left: 1px solid var(--ink-faded);
+      padding-left: 20px;
+    }
+
+    .hero-right-col p {
+      margin-bottom: 16px;
+    }
+
+    .drop-cap {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      line-height: 0.8;
+      padding-right: 10px;
+      padding-top: 6px;
+      font-weight: 900;
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 2px solid var(--ink);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-faded);
+      margin-top: 4px;
+    }
+
+    /* Section Teasers */
+    .section-teasers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 2px solid var(--ink);
+      margin-top: 32px;
+    }
+
+    .teaser {
+      padding: 16px;
+      border-right: 1px solid var(--ink);
+      text-decoration: none;
+      color: var(--ink);
+      transition: background 0.2s;
+    }
+
+    .teaser:last-child { border-right: none; }
+    .teaser:hover { background: var(--paper-dark); }
+
+    .teaser-section {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .teaser-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    /* ============ SECTIONS ============ */
+    .section {
+      padding: 32px;
+      border-bottom: 3px double var(--ink);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .section-subtitle {
+      font-style: italic;
+      color: var(--ink-faded);
+      font-size: 0.9rem;
+    }
+
+    .section-page {
+      margin-left: auto;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-faded);
+    }
+
+    /* Experience Grid */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .exp-story {
+      padding: 20px;
+      border: 1px solid var(--ink-faded);
+      background: var(--paper);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .exp-story:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .exp-story.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      border-width: 2px;
+      border-color: var(--ink);
+    }
+
+    .exp-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .exp-year {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .exp-company {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    .exp-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .exp-role {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--ink-light);
+      margin-bottom: 12px;
+    }
+
+    .exp-description {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .exp-highlights {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--ink-faded);
+    }
+
+    .exp-highlight {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      margin-bottom: 4px;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .exp-highlight::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .exp-image {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: white;
+      font-weight: 700;
+      min-height: 200px;
+    }
+
+    /* ============ SPORTS & CROSSWORD (Middle Section) ============ */
+    .diversions-section {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+    }
+
+    .sports-column {
+      padding: 24px;
+      border-right: 1px solid var(--ink);
+    }
+
+    .sports-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .team-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dotted var(--ink-faded);
+    }
+
+    .team-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .team-emoji {
+      font-size: 1.5rem;
+    }
+
+    .team-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .team-league {
+      font-size: 0.7rem;
+      color: var(--ink-faded);
+    }
+
+    .team-record {
+      font-family: 'Old Standard TT', serif;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .sports-quote {
+      margin-top: 20px;
+      padding: 16px;
+      background: var(--paper-dark);
+      font-style: italic;
+      font-size: 0.85rem;
+      text-align: center;
+      border: 1px solid var(--ink-faded);
+    }
+
+    /* Crossword */
+    .crossword-column {
+      padding: 24px;
+    }
+
+    .crossword-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+    }
+
+    .crossword-subtitle {
+      font-style: italic;
+      color: var(--ink-faded);
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .crossword-container {
+      display: flex;
+      gap: 32px;
+    }
+
+    .crossword-grid {
+      display: grid;
+      grid-template-columns: repeat(9, 32px);
+      grid-template-rows: repeat(9, 32px);
+      gap: 0;
+      border: 2px solid var(--ink);
+      flex-shrink: 0;
+    }
+
+    .crossword-cell {
+      border: 1px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      position: relative;
+      background: var(--paper);
+    }
+
+    .crossword-cell.black {
+      background: var(--ink);
+    }
+
+    .crossword-cell .cell-number {
+      position: absolute;
+      top: 1px;
+      left: 2px;
+      font-size: 0.5rem;
+      font-weight: 400;
+      color: var(--ink-faded);
+    }
+
+    .crossword-cell input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      outline: none;
+    }
+
+    .crossword-cell input:focus {
+      background: #fffde7;
+    }
+
+    .crossword-clues {
+      flex: 1;
+    }
+
+    .clues-section {
+      margin-bottom: 20px;
+    }
+
+    .clues-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    .clue {
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .clue-number {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ============ PROJECTS ============ */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .project-story {
+      border: 1px solid var(--ink-faded);
+      background: var(--paper);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .project-story:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .project-story.featured {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+      border-width: 2px;
+      border-color: var(--ink);
+    }
+
+    .project-image {
+      height: 100px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      border-bottom: 1px solid var(--ink-faded);
+    }
+
+    .project-story.featured .project-image {
+      height: 180px;
+      font-size: 4rem;
+    }
+
+    .project-content {
+      padding: 16px;
+    }
+
+    .project-type {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .project-story.featured .project-title {
+      font-size: 1.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .project-stats {
+      display: flex;
+      gap: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--ink-faded);
+    }
+
+    .project-stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .project-stat-label {
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-faded);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .project-link {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .project-link:hover { text-decoration: underline; }
+
+    /* ============ CLASSIFIEDS ============ */
+    .classifieds-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 24px;
+      background: var(--paper-dark);
+    }
+
+    .classified-ad {
+      border: 2px solid var(--ink);
+      padding: 16px;
+      text-align: center;
+      font-size: 0.8rem;
+      background: var(--paper);
+    }
+
+    .ad-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .ad-subtitle {
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .ad-price {
+      font-family: 'Old Standard TT', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    .instructions {
+      background: #fff8e7;
+      padding: 30px;
+      text-align: center;
+      margin: 40px;
+      border: 1px solid #e0d5c0;
+    }
+
+    .instructions h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="newspaper">
+    <!-- Masthead -->
+    <header class="masthead">
+      <div class="masthead-top">
+        <span>Est. 2022 • San Francisco, CA</span>
+        <span>Volume III, No. 26</span>
+        <span>Final Edition</span>
+      </div>
+      <h1 class="masthead-title">The Kothari Chronicle</h1>
+      <p class="masthead-subtitle">"All the Code That's Fit to Ship"</p>
+      <div class="masthead-rule">
+        <span class="masthead-date">Sunday, January 12th, 2025</span>
+      </div>
+    </header>
+
+    <!-- Section Navigation -->
+    <nav class="section-nav">
+      <a href="#front">Front Page</a>
+      <a href="#experience">Employment <span class="page-num">A2</span></a>
+      <a href="#diversions">Sports & Puzzles <span class="page-num">B1</span></a>
+      <a href="#projects">Technology <span class="page-num">C1</span></a>
+      <a href="#classifieds">Classifieds <span class="page-num">D1</span></a>
+    </nav>
+
+    <!-- ============ FRONT PAGE HERO ============ -->
+    <section class="front-page" id="front">
+      <div class="hero-kicker">Exclusive Profile • Class of 2026</div>
+      <h1 class="hero-headline">The Engineer Behind<br>Tomorrow's Web</h1>
+
+      <div class="hero-layout">
+        <div class="hero-left-col">
+          <p><span class="drop-cap">Y</span>ash Kothari doesn't just write code—he ships products that people actually use. Currently building at Vercel, the platform powering the modern web, he's part of the team making deployment seamless.</p>
+          <p>A Computer Science student at the University of Waterloo, Kothari has already completed five internships at companies ranging from early-stage startups to industry giants.</p>
+          <p>"I enjoy building products that help people," he says. "There's something deeply satisfying about solving a hard problem."</p>
+        </div>
+
+        <div class="hero-center">
+          <div class="laptop-container">
+            <!-- MacBook SVG -->
+            <svg class="laptop-svg" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Screen bezel -->
+              <rect x="40" y="10" width="320" height="210" rx="12" fill="#2d2d2d"/>
+              <!-- Screen -->
+              <rect x="52" y="22" width="296" height="186" rx="4" fill="#1a1a2e"/>
+              <!-- Camera dot -->
+              <circle cx="200" cy="16" r="2" fill="#444"/>
+              <!-- Bottom case -->
+              <path d="M20 220 L380 220 L390 260 C390 270 380 275 370 275 L30 275 C20 275 10 270 10 260 L20 220Z" fill="#c0c0c0"/>
+              <!-- Trackpad hint -->
+              <rect x="150" y="235" width="100" height="30" rx="4" fill="#b0b0b0"/>
+              <!-- Keyboard area -->
+              <rect x="50" y="220" width="300" height="8" fill="#333"/>
+              <!-- Hinge -->
+              <rect x="100" y="218" width="200" height="4" rx="2" fill="#999"/>
+            </svg>
+            
+            <!-- Screen content overlay -->
+            <div class="laptop-screen">
+              <div class="screen-content">
+                <div class="comment">// Yash Kothari</div>
+                <div class="prompt">→</div> const role = "SWE Intern";<br>
+                <div class="prompt">→</div> const company = "Vercel";<br>
+                <div class="prompt">→</div> const school = "UWaterloo";<br>
+                <br>
+                <div class="prompt">→</div> <span style="color: #f472b6;">ship</span>(code);<br>
+                <div style="color: #4ade80;">✓ Deployed successfully</div>
+              </div>
+            </div>
+          </div>
+          <p class="hero-caption">Building the future, one commit at a time</p>
+        </div>
+
+        <div class="hero-right-col">
+          <p>His journey has taken him through Shopify's security organization—where he won an internal hackathon—SeatGeek's catalog team in NYC, and the crypto frontier at Nest Wallet.</p>
+          <p>Each stop added new tools to an already impressive repertoire. His work has impacted thousands of users across 70+ countries.</p>
+          <p>Now at Vercel, he's helping shape the tools that developers worldwide rely on every day.</p>
+        </div>
+      </div>
+
+      <!-- Stats Banner -->
+      <div class="stats-banner">
+        <div class="stat-item">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Internships</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">1K+</div>
+          <div class="stat-label">App Users</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">70</div>
+          <div class="stat-label">Countries</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">8M+</div>
+          <div class="stat-label">Tokens Integrated</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">1</div>
+          <div class="stat-label">Hackathon Won</div>
+        </div>
+      </div>
+
+      <!-- Section Teasers -->
+      <div class="section-teasers">
+        <a href="#experience" class="teaser">
+          <div class="teaser-section">Employment • A2</div>
+          <div class="teaser-headline">From Shopify to Vercel: A Career in Motion</div>
+        </a>
+        <a href="#diversions" class="teaser">
+          <div class="teaser-section">Sports & Puzzles • B1</div>
+          <div class="teaser-headline">Bills, Leafs, and Today's Crossword</div>
+        </a>
+        <a href="#projects" class="teaser">
+          <div class="teaser-section">Technology • C1</div>
+          <div class="teaser-headline">Running Journal Hits 1,000 Users</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE SECTION ============ -->
+    <section class="section" id="experience">
+      <div class="section-header">
+        <h2 class="section-title">Employment</h2>
+        <span class="section-subtitle">Career highlights and professional experience</span>
+        <span class="section-page">Section A2</span>
+      </div>
+
+      <div class="experience-grid">
+        <article class="exp-story featured">
+          <div>
+            <div class="exp-meta">
+              <span class="exp-year">2025</span>
+              <span class="exp-company">Vercel</span>
+            </div>
+            <h3 class="exp-headline">Building the Platform That Powers the Modern Web</h3>
+            <p class="exp-role">Software Engineer Intern — San Francisco, CA</p>
+            <p class="exp-description">
+              Joining the team behind Next.js and the deployment platform used by Washington Post, 
+              Nike, and McDonald's. Working on developer tools and infrastructure that makes shipping 
+              to production as easy as pushing to git.
+            </p>
+            <div class="exp-highlights">
+              <div class="exp-highlight">Frontend Cloud infrastructure</div>
+              <div class="exp-highlight">Developer experience tooling</div>
+            </div>
+          </div>
+          <div class="exp-image">▲</div>
+        </article>
+
+        <article class="exp-story">
+          <div class="exp-meta">
+            <span class="exp-year">2025</span>
+            <span class="exp-company">SeatGeek</span>
+          </div>
+          <h3 class="exp-headline">Scaling Seat Perks to Hundreds of Venues</h3>
+          <p class="exp-role">Software Engineer Intern — NYC</p>
+          <p class="exp-description">
+            Built tooling to expand Seat Perks nationwide. Yankee Stadium games and Broadway shows included.
+          </p>
+        </article>
+
+        <article class="exp-story">
+          <div class="exp-meta">
+            <span class="exp-year">2025</span>
+            <span class="exp-company">Shopify</span>
+          </div>
+          <h3 class="exp-headline">AI Security Platform Wins Hackathon</h3>
+          <p class="exp-role">Software Engineer Intern — Toronto</p>
+          <p class="exp-description">
+            Led AI-powered security intelligence platform with semantic search and RAG. Won internal hackathon.
+          </p>
+        </article>
+
+        <article class="exp-story">
+          <div class="exp-meta">
+            <span class="exp-year">2024</span>
+            <span class="exp-company">Nest Wallet</span>
+          </div>
+          <h3 class="exp-headline">8 Million Tokens Across Chains</h3>
+          <p class="exp-role">Software Engineer Intern</p>
+          <p class="exp-description">
+            Built multi-chain trading support for self-custodial wallet. Developed onboarding and NFT features.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ SPORTS & CROSSWORD ============ -->
+    <section class="section" id="diversions" style="padding: 0;">
+      <div class="diversions-section">
+        <div class="sports-column">
+          <h3 class="sports-title">Sports Desk</h3>
+          
+          <div class="team-row">
+            <div class="team-info">
+              <span class="team-emoji">🦬</span>
+              <div>
+                <div class="team-name">Buffalo Bills</div>
+                <div class="team-league">NFL • AFC East</div>
+              </div>
+            </div>
+            <span class="team-record">13-4</span>
+          </div>
+
+          <div class="team-row">
+            <div class="team-info">
+              <span class="team-emoji">🍁</span>
+              <div>
+                <div class="team-name">Maple Leafs</div>
+                <div class="team-league">NHL • Atlantic</div>
+              </div>
+            </div>
+            <span class="team-record">25-13-2</span>
+          </div>
+
+          <div class="team-row">
+            <div class="team-info">
+              <span class="team-emoji">🐦</span>
+              <div>
+                <div class="team-name">Blue Jays</div>
+                <div class="team-league">MLB • AL East</div>
+              </div>
+            </div>
+            <span class="team-record">—</span>
+          </div>
+
+          <div class="team-row">
+            <div class="team-info">
+              <span class="team-emoji">🏎️</span>
+              <div>
+                <div class="team-name">Scuderia Ferrari</div>
+                <div class="team-league">Formula 1</div>
+              </div>
+            </div>
+            <span class="team-record">P2</span>
+          </div>
+
+          <div class="sports-quote">
+            "This is our year"<br>
+            <span style="font-size: 0.75rem; color: var(--ink-faded);">— Leafs fans, annually since 1967</span>
+          </div>
+        </div>
+
+        <div class="crossword-column">
+          <h3 class="crossword-title">The Chronicle Crossword</h3>
+          <p class="crossword-subtitle">Test your knowledge — all answers relate to Yash</p>
+
+          <div class="crossword-container">
+            <div class="crossword-grid">
+              <!-- Row 1: WATERLOO -->
+              <div class="crossword-cell"><span class="cell-number">1</span><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <!-- Row 2 -->
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell"><span class="cell-number">2</span><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <!-- Row 3: BILLS -->
+              <div class="crossword-cell"><span class="cell-number">3</span><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <!-- Row 4 -->
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell"><span class="cell-number">4</span><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <!-- Row 5: VERCEL -->
+              <div class="crossword-cell"><span class="cell-number">5</span><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <!-- Row 6 -->
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell"><span class="cell-number">6</span><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <!-- Row 7: SWIFT -->
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell"><span class="cell-number">7</span><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <!-- Row 8 -->
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <!-- Row 9: LEAFS -->
+              <div class="crossword-cell"><span class="cell-number">8</span><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell"><input type="text" maxlength="1"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+              <div class="crossword-cell black"></div>
+            </div>
+
+            <div class="crossword-clues">
+              <div class="clues-section">
+                <h4 class="clues-title">Across</h4>
+                <div class="clue"><span class="clue-number">1.</span> University attended (8)</div>
+                <div class="clue"><span class="clue-number">3.</span> Favourite NFL team, Buffalo ___ (5)</div>
+                <div class="clue"><span class="clue-number">5.</span> Current employer (6)</div>
+                <div class="clue"><span class="clue-number">7.</span> Language for iOS development (5)</div>
+                <div class="clue"><span class="clue-number">8.</span> Toronto hockey team, Maple ___ (5)</div>
+              </div>
+              <div class="clues-section">
+                <h4 class="clues-title">Down</h4>
+                <div class="clue"><span class="clue-number">2.</span> Where hackathon was won (7)</div>
+                <div class="clue"><span class="clue-number">4.</span> App for tracking runs (7)</div>
+                <div class="clue"><span class="clue-number">6.</span> Vercel's React framework (6)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section" id="projects">
+      <div class="section-header">
+        <h2 class="section-title">Technology</h2>
+        <span class="section-subtitle">Projects, ventures, and side quests</span>
+        <span class="section-page">Section C1</span>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-story featured">
+          <div class="project-image">🏃</div>
+          <div class="project-content">
+            <span class="project-type">iOS App • Launched 2022</span>
+            <h3 class="project-title">Running Journal Reaches 1,000+ Athletes Worldwide</h3>
+            <p class="project-desc">
+              A fitness tracking app now used in 70 countries. Built with Swift and SwiftUI, 
+              featuring workout logging, progress tracking, and training insights.
+            </p>
+            <div class="project-stats">
+              <div class="project-stat">
+                <span class="project-stat-value">1,000+</span>
+                <span class="project-stat-label">Users</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-value">70</span>
+                <span class="project-stat-label">Countries</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-value">4.8★</span>
+                <span class="project-stat-label">Rating</span>
+              </div>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">→ App Store</a>
+              <a href="#" class="project-link">→ GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-story">
+          <div class="project-image">🏆</div>
+          <div class="project-content">
+            <span class="project-type">Hackathon Winner</span>
+            <h3 class="project-title">ShoPacks</h3>
+            <p class="project-desc">Gamified e-commerce with collectible trading cards.</p>
+            <div class="project-links">
+              <a href="#" class="project-link">→ GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-story">
+          <div class="project-image">🏀</div>
+          <div class="project-content">
+            <span class="project-type">Machine Learning</span>
+            <h3 class="project-title">NBA Contract Predictor</h3>
+            <p class="project-desc">ML model predicting player salaries.</p>
+            <div class="project-links">
+              <a href="#" class="project-link">→ Demo</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-story">
+          <div class="project-image">📄</div>
+          <div class="project-content">
+            <span class="project-type">Web App</span>
+            <h3 class="project-title">LeResume</h3>
+            <p class="project-desc">AI-powered resume optimization.</p>
+            <div class="project-links">
+              <a href="#" class="project-link">→ Website</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-story">
+          <div class="project-image">💜</div>
+          <div class="project-content">
+            <span class="project-type">Nonprofit</span>
+            <h3 class="project-title">LLS Platform</h3>
+            <p class="project-desc">Patient-volunteer matching for cancer support.</p>
+            <div class="project-links">
+              <a href="#" class="project-link">→ Blueprint</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ CLASSIFIEDS ============ -->
+    <div class="classifieds-row" id="classifieds">
+      <div class="classified-ad">
+        <div class="ad-title">Wanted</div>
+        <div class="ad-subtitle">Difficult Problems</div>
+        <div class="ad-price">Inquire Within</div>
+      </div>
+      <div class="classified-ad">
+        <div class="ad-title">Free Coupon</div>
+        <div class="ad-subtitle">One (1) Coffee Chat</div>
+        <div style="font-size: 0.7rem; color: var(--ink-faded);">*while supplies last</div>
+      </div>
+      <div class="classified-ad" style="border-style: dashed;">
+        <div class="ad-title">In Memoriam</div>
+        <div class="ad-subtitle" style="font-style: italic;">Bugs Squashed</div>
+        <div style="font-size: 0.7rem;">2022 - 2025</div>
+      </div>
+      <div class="classified-ad">
+        <div class="ad-title">Contact</div>
+        <div style="font-size: 0.75rem; margin-top: 8px;">
+          Email • GitHub<br>LinkedIn • Twitter
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>© 2025 The Kothari Chronicle</span>
+      <nav class="footer-links">
+        <a href="#">Email</a>
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+      </nav>
+      <span>Printed in California</span>
+    </footer>
+  </div>
+
+  <div class="instructions">
+    <h3>Newspaper V5</h3>
+    <p>MacBook hero with code on screen, interactive crossword with clues about YOU (empty/solvable), sports & crossword between experiences and projects.</p>
+  </div>
+</body>
+</html>

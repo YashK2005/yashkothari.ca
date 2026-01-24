@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal Portfolio - Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #0a0a0a;
+      --fg: #e0e0e0;
+      --accent: #00ff88;
+      --accent2: #ff6b6b;
+      --accent3: #6b9fff;
+      --dim: #666;
+      --border: #333;
+    }
+    
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* CRT Scanline effect */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px
+      );
+      z-index: 1000;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* ============ HEADER ============ */
+    .header {
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .header-bar {
+      background: var(--border);
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .window-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--dim);
+    }
+
+    .window-btn.close { background: #ff5f57; }
+    .window-btn.min { background: #ffbd2e; }
+    .window-btn.max { background: #28ca42; }
+
+    .window-title {
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    .header-content {
+      padding: 24px;
+    }
+
+    .prompt {
+      color: var(--accent);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 18px;
+      background: var(--accent);
+      margin-left: 4px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .ascii-art {
+      color: var(--accent);
+      font-size: 10px;
+      line-height: 1.2;
+      margin: 16px 0;
+      white-space: pre;
+    }
+
+    .tagline {
+      color: var(--dim);
+      margin-top: 16px;
+    }
+
+    .tagline span {
+      color: var(--fg);
+    }
+
+    /* ============ COMMAND OUTPUT ============ */
+    .section {
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      background: var(--border);
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .section-title {
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    .section-content {
+      padding: 24px;
+    }
+
+    .command {
+      margin-bottom: 24px;
+    }
+
+    .command-line {
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .command-line .path {
+      color: var(--accent3);
+    }
+
+    .command-line .cmd {
+      color: var(--fg);
+    }
+
+    .output {
+      padding-left: 0;
+    }
+
+    /* ============ EXPERIENCE LIST ============ */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .exp-item:last-child {
+      border-bottom: none;
+    }
+
+    .exp-date {
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    .exp-company {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .exp-role {
+      color: var(--fg);
+    }
+
+    .exp-desc {
+      color: var(--dim);
+      margin-top: 8px;
+    }
+
+    /* ============ STATS TABLE ============ */
+    .stats-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .stats-table th {
+      text-align: left;
+      color: var(--accent3);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .stats-table td {
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .stats-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .stats-table .value {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ============ PROJECTS ============ */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      padding: 16px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      background: rgba(0, 255, 136, 0.02);
+    }
+
+    .project-name {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .project-name::before {
+      content: '> ';
+      color: var(--dim);
+    }
+
+    .project-desc {
+      color: var(--dim);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .project-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+    }
+
+    .project-meta span {
+      color: var(--dim);
+    }
+
+    .project-meta .highlight {
+      color: var(--accent2);
+    }
+
+    /* ============ CONTACT ============ */
+    .contact-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .contact-link {
+      color: var(--fg);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover {
+      color: var(--accent);
+    }
+
+    .contact-link::before {
+      content: '→ ';
+      color: var(--dim);
+    }
+
+    /* ============ DECORATIVE ============ */
+    .divider {
+      color: var(--border);
+      margin: 24px 0;
+      white-space: pre;
+      overflow: hidden;
+    }
+
+    .status-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--border);
+      padding: 8px 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--dim);
+      z-index: 100;
+    }
+
+    .status-bar .active {
+      color: var(--accent);
+    }
+
+    /* ============ TYPING EFFECT ============ */
+    .typing {
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typing 2s steps(40);
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    /* ============ HELP COMMAND ============ */
+    .help-grid {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 8px 24px;
+    }
+
+    .help-cmd {
+      color: var(--accent);
+    }
+
+    .help-desc {
+      color: var(--dim);
+    }
+
+    /* ============ PROGRESS BARS ============ */
+    .skill-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 8px 0;
+    }
+
+    .skill-name {
+      width: 100px;
+      color: var(--fg);
+    }
+
+    .skill-progress {
+      flex: 1;
+      height: 8px;
+      background: var(--border);
+      position: relative;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .skill-value {
+      width: 40px;
+      text-align: right;
+      color: var(--dim);
+      font-size: 12px;
+    }
+
+    /* ============ INSTRUCTIONS ============ */
+    .instructions {
+      text-align: center;
+      padding: 40px;
+      background: #111;
+      margin: 60px 0 40px 0;
+      border: 1px dashed var(--border);
+    }
+
+    .instructions h3 {
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .instructions p {
+      color: var(--dim);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header / Hero -->
+    <div class="header">
+      <div class="header-bar">
+        <div class="window-controls">
+          <div class="window-btn close"></div>
+          <div class="window-btn min"></div>
+          <div class="window-btn max"></div>
+        </div>
+        <span class="window-title">yash@portfolio ~ </span>
+        <span></span>
+      </div>
+      <div class="header-content">
+        <div class="command-line">
+          <span class="prompt">$</span> <span class="cmd">whoami</span>
+        </div>
+<pre class="ascii-art">
+██╗   ██╗ █████╗ ███████╗██╗  ██╗
+╚██╗ ██╔╝██╔══██╗██╔════╝██║  ██║
+ ╚████╔╝ ███████║███████╗███████║
+  ╚██╔╝  ██╔══██║╚════██║██╔══██║
+   ██║   ██║  ██║███████║██║  ██║
+   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+   KOTHARI
+</pre>
+        <div class="tagline">
+          <span>Software Engineer</span> @ <span style="color: var(--accent);">Vercel</span><br>
+          CS @ University of Waterloo '26<br>
+          <span class="dim">Building products that help people.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">system stats</span>
+      </div>
+      <div class="section-content">
+        <div class="command-line">
+          <span class="prompt">$</span> <span class="cmd">neofetch --stats</span>
+        </div>
+        <table class="stats-table">
+          <tr><th>METRIC</th><th>VALUE</th></tr>
+          <tr><td>Internships</td><td class="value">5</td></tr>
+          <tr><td>Projects Shipped</td><td class="value">10+</td></tr>
+          <tr><td>Languages</td><td class="value">TypeScript, Python, Go, Swift, Rust...</td></tr>
+          <tr><td>Users Impacted</td><td class="value">1,000+</td></tr>
+          <tr><td>Status</td><td class="value" style="color: var(--accent);">● ONLINE</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">experience.log</span>
+      </div>
+      <div class="section-content">
+        <div class="command-line">
+          <span class="prompt">$</span> <span class="cmd">cat ~/.experience | head -4</span>
+        </div>
+        <div class="output">
+          <div class="exp-item">
+            <span class="exp-date">2025</span>
+            <div>
+              <span class="exp-company">Vercel</span> <span class="exp-role">— Software Engineer Intern</span>
+              <div class="exp-desc">Building the future of web development infrastructure.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <span class="exp-date">2025</span>
+            <div>
+              <span class="exp-company">SeatGeek</span> <span class="exp-role">— Software Engineer Intern</span>
+              <div class="exp-desc">Catalog team. Scaling Seat Perks to venues nationwide.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <span class="exp-date">2025</span>
+            <div>
+              <span class="exp-company">Shopify</span> <span class="exp-role">— Software Engineer Intern</span>
+              <div class="exp-desc">Security org. AI-powered intelligence platform. Hackathon winner.</div>
+            </div>
+          </div>
+          <div class="exp-item">
+            <span class="exp-date">2024</span>
+            <div>
+              <span class="exp-company">Nest Wallet</span> <span class="exp-role">— Software Engineer Intern</span>
+              <div class="exp-desc">Self-custodial crypto wallet. 8M+ tokens across chains.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">~/projects</span>
+      </div>
+      <div class="section-content">
+        <div class="command-line">
+          <span class="prompt">$</span> <span class="cmd">ls -la ~/projects</span>
+        </div>
+        <div class="project-grid">
+          <div class="project-card">
+            <div class="project-name">running-journal</div>
+            <div class="project-desc">iOS app for tracking running workouts</div>
+            <div class="project-meta">
+              <span>swift</span>
+              <span class="highlight">1K+ users</span>
+              <span>70 countries</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-name">nba-contract-predictor</div>
+            <div class="project-desc">ML model predicting player salaries</div>
+            <div class="project-meta">
+              <span>python</span>
+              <span class="highlight">sklearn</span>
+              <span>pandas</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-name">leresume</div>
+            <div class="project-desc">AI-powered resume optimization</div>
+            <div class="project-meta">
+              <span>typescript</span>
+              <span class="highlight">next.js</span>
+              <span>openai</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-name">shopacks</div>
+            <div class="project-desc">Gamified e-commerce trading cards</div>
+            <div class="project-meta">
+              <span>react</span>
+              <span class="highlight">hackathon winner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">skills.conf</span>
+      </div>
+      <div class="section-content">
+        <div class="command-line">
+          <span class="prompt">$</span> <span class="cmd">cat ~/.skills | sort -r</span>
+        </div>
+        <div class="skill-bar">
+          <span class="skill-name">TypeScript</span>
+          <div class="skill-progress"><div class="skill-fill" style="width: 95%"></div></div>
+          <span class="skill-value">95%</span>
+        </div>
+        <div class="skill-bar">
+          <span class="skill-name">React/Next</span>
+          <div class="skill-progress"><div class="skill-fill" style="width: 90%"></div></div>
+          <span class="skill-value">90%</span>
+        </div>
+        <div class="skill-bar">
+          <span class="skill-name">Python</span>
+          <div class="skill-progress"><div class="skill-fill" style="width: 85%"></div></div>
+          <span class="skill-value">85%</span>
+        </div>
+        <div class="skill-bar">
+          <span class="skill-name">Swift</span>
+          <div class="skill-progress"><div class="skill-fill" style="width: 80%"></div></div>
+          <span class="skill-value">80%</span>
+        </div>
+        <div class="skill-bar">
+          <span class="skill-name">Go</span>
+          <div class="skill-progress"><div class="skill-fill" style="width: 70%"></div></div>
+          <span class="skill-value">70%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">contact</span>
+      </div>
+      <div class="section-content">
+        <div class="command-line">
+          <span class="prompt">$</span> <span class="cmd">cat ~/.contact</span>
+        </div>
+        <div class="contact-links">
+          <a href="#" class="contact-link">email</a>
+          <a href="#" class="contact-link">github</a>
+          <a href="#" class="contact-link">linkedin</a>
+          <a href="#" class="contact-link">twitter</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h3>Brutalist Terminal Mockup</h3>
+      <p>Raw, monospace aesthetic with terminal commands, ASCII art, and developer-centric design.</p>
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span><span class="active">NORMAL</span> | UTF-8 | LF</span>
+    <span>yash@portfolio</span>
+    <span>ln 1, col 1</span>
+  </div>
+</body>
+</html>

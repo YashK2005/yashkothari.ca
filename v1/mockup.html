@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports Card Portfolio - Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: #f5f2eb; /* Off-white cardstock feel */
+      min-height: 100vh;
+      padding: 60px 20px;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(200, 180, 150, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(180, 160, 140, 0.1) 0%, transparent 50%);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.25rem;
+      color: #666;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 60px;
+    }
+
+    .cards-grid {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* ============ THE CARD ============ */
+    .card-wrapper {
+      perspective: 1000px;
+    }
+
+    .card {
+      width: 300px;
+      height: 420px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 10px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    /* Front of card */
+    .card-front {
+      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Holographic shimmer effect */
+    .card-front::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255, 219, 112, 0.1) 45%,
+        rgba(132, 255, 255, 0.1) 50%,
+        rgba(255, 112, 253, 0.1) 55%,
+        transparent 60%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .card-wrapper:hover .card-front::before {
+      opacity: 1;
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .card-header {
+      background: linear-gradient(90deg, #e63946 0%, #c62828 100%);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-team {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .card-year {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-image-area {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+    }
+
+    .player-silhouette {
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+    }
+
+    .card-number {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.1);
+      line-height: 1;
+    }
+
+    .card-info {
+      background: linear-gradient(180deg, #0a0a14 0%, #1a1a2e 100%);
+      padding: 16px;
+    }
+
+    .player-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+
+    .player-position {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      color: #e63946;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    .player-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    .stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Back of card */
+    .card-back {
+      background: #faf8f3;
+      transform: rotateY(180deg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .back-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #1a1a2e;
+    }
+
+    .back-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      text-transform: uppercase;
+    }
+
+    .back-number {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e63946;
+      line-height: 1;
+    }
+
+    .back-bio {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.85rem;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .back-section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .career-highlights {
+      flex: 1;
+    }
+
+    .highlight {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.8rem;
+      color: #333;
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .highlight-year {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      color: #e63946;
+      min-width: 40px;
+    }
+
+    .back-footer {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-series {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .college-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============ PROJECT CARD VARIANT ============ */
+    .card-front.project {
+      background: linear-gradient(145deg, #2d3436 0%, #1e272e 100%);
+    }
+
+    .card-front.project .card-header {
+      background: linear-gradient(90deg, #00b894 0%, #00a085 100%);
+    }
+
+    .project-preview {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .project-icon {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 8px 32px rgba(253, 203, 110, 0.3);
+    }
+
+    /* ============ INSTRUCTIONS ============ */
+    .instructions {
+      text-align: center;
+      margin-top: 60px;
+      padding: 24px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 12px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .instructions h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .instructions p {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* ============ SECTION DIVIDER ============ */
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #999;
+      margin-top: 80px;
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 100px;
+      height: 1px;
+      background: #ddd;
+    }
+
+    .section-title::before { right: calc(50% + 80px); }
+    .section-title::after { left: calc(50% + 80px); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Yash Kothari</h1>
+    <p class="subtitle">2025 Collection</p>
+
+    <div class="cards-grid">
+      <!-- Main Player Card -->
+      <div class="card-wrapper">
+        <div class="card">
+          <div class="card-front">
+            <div class="card-header">
+              <span class="card-team">Vercel</span>
+              <span class="card-year">2025 Season</span>
+            </div>
+            <div class="card-image-area">
+              <div class="card-number">26</div>
+              <div class="player-silhouette">YK</div>
+            </div>
+            <div class="card-info">
+              <div class="player-name">Yash Kothari</div>
+              <div class="player-position">Software Engineer</div>
+              <div class="player-stats">
+                <div class="stat">
+                  <div class="stat-value">5</div>
+                  <div class="stat-label">Interns</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">10+</div>
+                  <div class="stat-label">Projects</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">8</div>
+                  <div class="stat-label">Langs</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">1K+</div>
+                  <div class="stat-label">Users</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="back-header">
+              <div class="back-name">Yash Kothari</div>
+              <div class="back-number">#26</div>
+            </div>
+            <p class="back-bio">
+              CS student at University of Waterloo. Currently building at Vercel. 
+              Passionate about shipping products that help people, exploring ML and robotics, 
+              and tackling difficult problems.
+            </p>
+            <div class="career-highlights">
+              <div class="back-section-title">Career Highlights</div>
+              <div class="highlight">
+                <span class="highlight-year">2025</span>
+                <span>Software Engineer Intern @ Vercel</span>
+              </div>
+              <div class="highlight">
+                <span class="highlight-year">2025</span>
+                <span>SWE Intern @ SeatGeek — Catalog Team</span>
+              </div>
+              <div class="highlight">
+                <span class="highlight-year">2025</span>
+                <span>SWE Intern @ Shopify — Security Org</span>
+              </div>
+              <div class="highlight">
+                <span class="highlight-year">2024</span>
+                <span>SWE Intern @ Nest Wallet</span>
+              </div>
+            </div>
+            <div class="back-footer">
+              <span class="card-series">Portfolio Series 001</span>
+              <span class="college-badge">UWaterloo '26</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience Card - SeatGeek -->
+      <div class="card-wrapper">
+        <div class="card">
+          <div class="card-front">
+            <div class="card-header">
+              <span class="card-team">SeatGeek</span>
+              <span class="card-year">Spring 2025</span>
+            </div>
+            <div class="card-image-area">
+              <div class="card-number">SG</div>
+              <div class="player-silhouette" style="background: linear-gradient(135deg, #f7931e 0%, #e8590c 100%); box-shadow: 0 8px 32px rgba(247, 147, 30, 0.4);">SG</div>
+            </div>
+            <div class="card-info">
+              <div class="player-name">Catalog Team</div>
+              <div class="player-position">Software Engineer Intern</div>
+              <div class="player-stats">
+                <div class="stat">
+                  <div class="stat-value">NYC</div>
+                  <div class="stat-label">Location</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">4</div>
+                  <div class="stat-label">Months</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">Go</div>
+                  <div class="stat-label">Stack</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">⭐</div>
+                  <div class="stat-label">Rating</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="back-header">
+              <div class="back-name">SeatGeek</div>
+              <div class="back-number">2025</div>
+            </div>
+            <p class="back-bio">
+              Worked on the Catalog team building tooling to scale Seat Perks to more venues and events. 
+              Spent time watching baseball games and broadway shows in NYC!
+            </p>
+            <div class="career-highlights">
+              <div class="back-section-title">Key Contributions</div>
+              <div class="highlight">
+                <span>Built Seat Perks scaling infrastructure</span>
+              </div>
+              <div class="highlight">
+                <span>Catalog team tooling development</span>
+              </div>
+              <div class="highlight">
+                <span>Venue & event platform enhancements</span>
+              </div>
+            </div>
+            <div class="back-footer">
+              <span class="card-series">Experience Card</span>
+              <span class="college-badge">Spring '25</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Card -->
+      <div class="card-wrapper">
+        <div class="card">
+          <div class="card-front project">
+            <div class="card-header">
+              <span class="card-team">Side Project</span>
+              <span class="card-year">2022 - Present</span>
+            </div>
+            <div class="project-preview">
+              <div class="card-number">🏃</div>
+              <div class="project-icon">🏃</div>
+            </div>
+            <div class="card-info">
+              <div class="player-name">Running Journal</div>
+              <div class="player-position">iOS App</div>
+              <div class="player-stats">
+                <div class="stat">
+                  <div class="stat-value">1K</div>
+                  <div class="stat-label">Users</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">70</div>
+                  <div class="stat-label">Countries</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">Swift</div>
+                  <div class="stat-label">Stack</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">4.8</div>
+                  <div class="stat-label">Rating</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="back-header">
+              <div class="back-name">Running Journal</div>
+              <div class="back-number">📱</div>
+            </div>
+            <p class="back-bio">
+              iOS app for tracking running workouts. Used by 1,000+ athletes in approximately 70 countries around the world.
+            </p>
+            <div class="career-highlights">
+              <div class="back-section-title">Tech Stack</div>
+              <div class="highlight"><span>Swift / SwiftUI</span></div>
+              <div class="highlight"><span>HealthKit Integration</span></div>
+              <div class="highlight"><span>Core Data</span></div>
+            </div>
+            <div class="back-footer">
+              <span class="card-series">Project Card</span>
+              <span class="college-badge">App Store</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h3>Hover to flip cards</h3>
+      <p>This is a mockup of the sports card aesthetic. The full site would have more cards, navigation, a hero section, and contact form.</p>
+    </div>
+
+    <p class="section-title">What do you think?</p>
+  </div>
+</body>
+</html>

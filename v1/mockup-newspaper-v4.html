@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Kothari Chronicle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --paper: #f4f1e8;
+      --paper-dark: #e8e4d9;
+      --ink: #1a1a1a;
+      --ink-light: #444;
+      --ink-faded: #666;
+      --accent: #8b0000;
+    }
+    
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: #d4d0c4;
+      color: var(--ink);
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .newspaper {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: var(--paper);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.1), 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .newspaper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    /* ============ MASTHEAD ============ */
+    .masthead {
+      text-align: center;
+      padding: 24px 40px 20px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .masthead-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faded);
+      margin-bottom: 12px;
+    }
+
+    .masthead-title {
+      font-family: 'UnifrakturMaguntia', serif;
+      font-size: 5rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin: 8px 0;
+    }
+
+    .masthead-subtitle {
+      font-family: 'Old Standard TT', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--ink-light);
+      letter-spacing: 0.2em;
+      margin-top: 8px;
+    }
+
+    .masthead-rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .masthead-rule::before,
+    .masthead-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--ink);
+    }
+
+    .masthead-date {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ============ SECTION NAV ============ */
+    .section-nav {
+      display: flex;
+      justify-content: center;
+      border-bottom: 3px double var(--ink);
+      background: var(--paper-dark);
+    }
+
+    .section-nav a {
+      padding: 12px 24px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink);
+      text-decoration: none;
+      border-right: 1px solid var(--ink-faded);
+      transition: background 0.2s;
+    }
+
+    .section-nav a:last-child {
+      border-right: none;
+    }
+
+    .section-nav a:hover {
+      background: var(--paper);
+      color: var(--accent);
+    }
+
+    .section-nav .page-num {
+      font-family: 'Old Standard TT', serif;
+      font-size: 0.6rem;
+      color: var(--ink-faded);
+      margin-left: 6px;
+    }
+
+    /* ============ FRONT PAGE HERO ============ */
+    .front-page {
+      padding: 32px;
+      border-bottom: 3px double var(--ink);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 32px;
+    }
+
+    .hero-main {
+      border-right: 1px solid var(--ink);
+      padding-right: 32px;
+    }
+
+    .hero-kicker {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-deck {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--ink-light);
+      line-height: 1.4;
+      margin-bottom: 20px;
+      border-left: 3px solid var(--accent);
+      padding-left: 16px;
+    }
+
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(145deg, #2c3e50 0%, #1a1a2e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.05) 2px,
+        rgba(0,0,0,0.05) 4px
+      );
+    }
+
+    .hero-initials {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      font-weight: 900;
+      color: white;
+      opacity: 0.95;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    .hero-caption {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: var(--ink-faded);
+      text-align: center;
+    }
+
+    .hero-body {
+      column-count: 2;
+      column-gap: 24px;
+      column-rule: 1px solid var(--ink-faded);
+      margin-top: 20px;
+      text-align: justify;
+    }
+
+    .hero-body p {
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .drop-cap {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      line-height: 0.8;
+      padding-right: 12px;
+      padding-top: 8px;
+      font-weight: 900;
+    }
+
+    /* Hero Sidebar */
+    .hero-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-box {
+      border: 2px solid var(--ink);
+      padding: 16px;
+      background: var(--paper);
+    }
+
+    .sidebar-box-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .quick-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-faded);
+      margin-top: 4px;
+    }
+
+    .current-position {
+      text-align: center;
+    }
+
+    .current-company {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .current-role {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+    }
+
+    .current-status {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 12px;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .weather-mini {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--paper-dark);
+      border: 1px solid var(--ink-faded);
+    }
+
+    .weather-temp {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .weather-info {
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .weather-location {
+      font-weight: 700;
+    }
+
+    /* Section Teasers */
+    .section-teasers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 2px solid var(--ink);
+      margin-top: 24px;
+    }
+
+    .teaser {
+      padding: 16px;
+      border-right: 1px solid var(--ink);
+      text-decoration: none;
+      color: var(--ink);
+      transition: background 0.2s;
+    }
+
+    .teaser:last-child {
+      border-right: none;
+    }
+
+    .teaser:hover {
+      background: var(--paper-dark);
+    }
+
+    .teaser-section {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .teaser-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .teaser-summary {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      line-height: 1.4;
+    }
+
+    /* ============ EXPERIENCE SECTION ============ */
+    .section {
+      padding: 32px;
+      border-bottom: 3px double var(--ink);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .section-subtitle {
+      font-style: italic;
+      color: var(--ink-faded);
+      font-size: 0.9rem;
+    }
+
+    .section-page {
+      margin-left: auto;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-faded);
+    }
+
+    /* Experience Cards as News Stories */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .exp-story {
+      padding: 20px;
+      border: 1px solid var(--ink-faded);
+      background: var(--paper);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .exp-story:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .exp-story.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      border-width: 2px;
+      border-color: var(--ink);
+    }
+
+    .exp-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .exp-year {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .exp-company {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    .exp-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .exp-role {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--ink-light);
+      margin-bottom: 12px;
+    }
+
+    .exp-description {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .exp-highlights {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--ink-faded);
+    }
+
+    .exp-highlight {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      margin-bottom: 4px;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .exp-highlight::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .exp-image {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: white;
+      font-weight: 700;
+      min-height: 200px;
+    }
+
+    /* ============ PROJECTS SECTION ============ */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .project-story {
+      border: 1px solid var(--ink-faded);
+      background: var(--paper);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .project-story:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .project-story.featured {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+      border-width: 2px;
+      border-color: var(--ink);
+    }
+
+    .project-image {
+      height: 120px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      border-bottom: 1px solid var(--ink-faded);
+    }
+
+    .project-story.featured .project-image {
+      height: 200px;
+      font-size: 4rem;
+    }
+
+    .project-content {
+      padding: 16px;
+    }
+
+    .project-type {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .project-story.featured .project-title {
+      font-size: 1.6rem;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .project-stats {
+      display: flex;
+      gap: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--ink-faded);
+      font-size: 0.75rem;
+    }
+
+    .project-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .project-stat-label {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-faded);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .project-link {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ============ EASTER EGG SECTIONS ============ */
+    .extras-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+    }
+
+    .extra-section {
+      padding: 20px;
+      border-right: 1px solid var(--ink);
+    }
+
+    .extra-section:last-child {
+      border-right: none;
+    }
+
+    .extra-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+
+    /* Sports */
+    .team-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px dotted var(--ink-faded);
+      font-size: 0.8rem;
+    }
+
+    .team-name {
+      font-weight: 700;
+    }
+
+    .team-record {
+      font-family: 'Old Standard TT', serif;
+    }
+
+    /* Mini Crossword */
+    .mini-crossword {
+      display: grid;
+      grid-template-columns: repeat(5, 28px);
+      gap: 0;
+      margin-bottom: 12px;
+    }
+
+    .mini-cell {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .mini-cell.black {
+      background: var(--ink);
+    }
+
+    .clue-mini {
+      font-size: 0.75rem;
+      margin-bottom: 4px;
+    }
+
+    /* Classifieds Mini */
+    .classified-mini {
+      border: 1px solid var(--ink);
+      padding: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 0.75rem;
+    }
+
+    .classified-mini-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--paper-dark);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ============ UTILITY ============ */
+    .divider {
+      border-top: 1px solid var(--ink);
+      margin: 24px 0;
+    }
+
+    .instructions {
+      background: #fff8e7;
+      padding: 30px;
+      text-align: center;
+      margin: 40px;
+      border: 1px solid #e0d5c0;
+    }
+
+    .instructions h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="newspaper">
+    <!-- Masthead -->
+    <header class="masthead">
+      <div class="masthead-top">
+        <span>Est. 2022 • San Francisco, CA</span>
+        <span>Volume III, No. 26</span>
+        <span>Final Edition</span>
+      </div>
+      <h1 class="masthead-title">The Kothari Chronicle</h1>
+      <p class="masthead-subtitle">"All the Code That's Fit to Ship"</p>
+      <div class="masthead-rule">
+        <span class="masthead-date">Sunday, January 12th, 2025</span>
+      </div>
+    </header>
+
+    <!-- Section Navigation -->
+    <nav class="section-nav">
+      <a href="#front">Front Page</a>
+      <a href="#experience">Employment <span class="page-num">A2</span></a>
+      <a href="#projects">Technology <span class="page-num">B1</span></a>
+      <a href="#sports">Sports <span class="page-num">C1</span></a>
+      <a href="#classifieds">Classifieds <span class="page-num">D1</span></a>
+    </nav>
+
+    <!-- ============ FRONT PAGE HERO ============ -->
+    <section class="front-page" id="front">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <span class="hero-kicker">Exclusive Profile</span>
+          <h1 class="hero-headline">Meet the Engineer Building Tomorrow's Web</h1>
+          <p class="hero-deck">
+            From competitive programming in high school to shipping production code at 
+            Silicon Valley's top companies—the story of a builder who never stops.
+          </p>
+          
+          <div class="hero-image">
+            <span class="hero-initials">YK</span>
+          </div>
+          <p class="hero-caption">Yash Kothari, Software Engineer — San Francisco, 2025</p>
+          
+          <div class="hero-body">
+            <p>
+              <span class="drop-cap">Y</span>ash Kothari doesn't just write code—he ships products that people actually use. 
+              Currently building at Vercel, the platform powering the modern web, he's part of the team 
+              making deployment as simple as a git push.
+            </p>
+            <p>
+              A Computer Science student at the University of Waterloo (class of 2026), Kothari has 
+              already completed five internships at companies ranging from early-stage startups to 
+              industry giants. His work has impacted thousands of users across 70+ countries.
+            </p>
+            <p>
+              "I enjoy building products that help people," he says. "There's something deeply 
+              satisfying about solving a hard problem and watching real people benefit from the solution."
+            </p>
+            <p>
+              His journey has taken him through Shopify's security organization (where he won an 
+              internal hackathon), SeatGeek's catalog team, and the crypto frontier at Nest Wallet—each 
+              stop adding new tools to an already impressive repertoire.
+            </p>
+          </div>
+        </div>
+
+        <aside class="hero-sidebar">
+          <div class="sidebar-box">
+            <div class="sidebar-box-title">Current Position</div>
+            <div class="current-position">
+              <div class="current-company">Vercel</div>
+              <div class="current-role">Software Engineer Intern</div>
+              <span class="current-status">● Currently Active</span>
+            </div>
+          </div>
+
+          <div class="sidebar-box">
+            <div class="sidebar-box-title">By the Numbers</div>
+            <div class="quick-stats">
+              <div class="stat-item">
+                <div class="stat-value">5</div>
+                <div class="stat-label">Internships</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">1K+</div>
+                <div class="stat-label">Users</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">70</div>
+                <div class="stat-label">Countries</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">8M+</div>
+                <div class="stat-label">Tokens Integrated</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="weather-mini">
+            <div class="weather-temp">58°F</div>
+            <div class="weather-info">
+              <div class="weather-location">San Francisco</div>
+              <div>Partly Cloudy</div>
+            </div>
+          </div>
+
+          <div class="sidebar-box" style="background: var(--ink); color: var(--paper);">
+            <div class="sidebar-box-title" style="color: var(--paper); border-color: var(--paper-dark);">Get in Touch</div>
+            <div style="text-align: center; font-size: 0.85rem;">
+              <div style="margin-bottom: 8px;">Open to opportunities</div>
+              <div style="font-size: 0.75rem; opacity: 0.8;">See Classifieds, Page D1</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Section Teasers -->
+      <div class="section-teasers">
+        <a href="#experience" class="teaser">
+          <div class="teaser-section">Employment • A2</div>
+          <div class="teaser-headline">From Shopify to SeatGeek: A Career in Motion</div>
+          <div class="teaser-summary">Five internships, four industries, countless lines of code shipped to production.</div>
+        </a>
+        <a href="#projects" class="teaser">
+          <div class="teaser-section">Technology • B1</div>
+          <div class="teaser-headline">Running Journal Hits 1,000 Users Worldwide</div>
+          <div class="teaser-summary">iOS fitness app gains traction in 70 countries. Plus: AI resume tools and more.</div>
+        </a>
+        <a href="#sports" class="teaser">
+          <div class="teaser-section">Sports • C1</div>
+          <div class="teaser-headline">Bills Push for Playoffs; Ferrari Eyes Championship</div>
+          <div class="teaser-summary">Following the teams that matter. Plus: Today's crossword puzzle.</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE SECTION ============ -->
+    <section class="section" id="experience">
+      <div class="section-header">
+        <h2 class="section-title">Employment</h2>
+        <span class="section-subtitle">Career highlights and professional experience</span>
+        <span class="section-page">Section A2</span>
+      </div>
+
+      <div class="experience-grid">
+        <article class="exp-story featured">
+          <div>
+            <div class="exp-meta">
+              <span class="exp-year">2025</span>
+              <span class="exp-company">Vercel</span>
+            </div>
+            <h3 class="exp-headline">Building the Platform That Powers the Modern Web</h3>
+            <p class="exp-role">Software Engineer Intern — San Francisco, CA</p>
+            <p class="exp-description">
+              Joining the team behind Next.js and the deployment platform used by companies like 
+              Washington Post, Nike, and McDonald's. Working on developer tools and infrastructure 
+              that makes shipping to production as easy as pushing to git.
+            </p>
+            <div class="exp-highlights">
+              <div class="exp-highlight">Frontend Cloud infrastructure</div>
+              <div class="exp-highlight">Developer experience tooling</div>
+              <div class="exp-highlight">Next.js ecosystem</div>
+            </div>
+          </div>
+          <div class="exp-image">VERCEL</div>
+        </article>
+
+        <article class="exp-story">
+          <div class="exp-meta">
+            <span class="exp-year">2025</span>
+            <span class="exp-company">SeatGeek</span>
+          </div>
+          <h3 class="exp-headline">Scaling Seat Perks to Hundreds of Venues</h3>
+          <p class="exp-role">Software Engineer Intern — New York, NY</p>
+          <p class="exp-description">
+            Built tooling on the Catalog team to expand the Seat Perks program nationwide. 
+            Experienced baseball games at Yankee Stadium and Broadway shows while shipping 
+            production code.
+          </p>
+          <div class="exp-highlights">
+            <div class="exp-highlight">Venue perks infrastructure</div>
+            <div class="exp-highlight">Go backend services</div>
+          </div>
+        </article>
+
+        <article class="exp-story">
+          <div class="exp-meta">
+            <span class="exp-year">2025</span>
+            <span class="exp-company">Shopify</span>
+          </div>
+          <h3 class="exp-headline">AI Security Platform Wins Internal Hackathon</h3>
+          <p class="exp-role">Software Engineer Intern — Toronto, ON</p>
+          <p class="exp-description">
+            Led development of an AI-powered security intelligence platform with semantic search 
+            and RAG capabilities. Built and deployed an MCP server. Won top honors at company hackathon.
+          </p>
+          <div class="exp-highlights">
+            <div class="exp-highlight">Hackathon Winner</div>
+            <div class="exp-highlight">AI/ML integration</div>
+          </div>
+        </article>
+
+        <article class="exp-story">
+          <div class="exp-meta">
+            <span class="exp-year">2024</span>
+            <span class="exp-company">Nest Wallet</span>
+          </div>
+          <h3 class="exp-headline">Integrating 8 Million Tokens Across Chains</h3>
+          <p class="exp-role">Software Engineer Intern — Remote</p>
+          <p class="exp-description">
+            Built trading support for 8M+ tokens across multiple blockchains for the self-custodial 
+            wallet. Developed onboarding flows, localization, and NFT transfer features.
+          </p>
+          <div class="exp-highlights">
+            <div class="exp-highlight">Multi-chain integration</div>
+            <div class="exp-highlight">React Native</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS SECTION ============ -->
+    <section class="section" id="projects">
+      <div class="section-header">
+        <h2 class="section-title">Technology</h2>
+        <span class="section-subtitle">Projects, ventures, and side quests</span>
+        <span class="section-page">Section B1</span>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-story featured">
+          <div class="project-image">🏃</div>
+          <div class="project-content">
+            <span class="project-type">iOS App • Launched 2022</span>
+            <h3 class="project-title">Running Journal Reaches 1,000+ Athletes Worldwide</h3>
+            <p class="project-desc">
+              A fitness tracking app for runners that's now used in 70 countries. Built with Swift 
+              and SwiftUI, featuring workout logging, progress tracking, and training insights. 
+              Available on the App Store with a 4.8-star rating.
+            </p>
+            <div class="project-stats">
+              <div class="project-stat">
+                <span class="project-stat-value">1,000+</span>
+                <span class="project-stat-label">Users</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-value">70</span>
+                <span class="project-stat-label">Countries</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-value">4.8★</span>
+                <span class="project-stat-label">Rating</span>
+              </div>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">→ App Store</a>
+              <a href="#" class="project-link">→ GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-story">
+          <div class="project-image">🏆</div>
+          <div class="project-content">
+            <span class="project-type">Hackathon Winner</span>
+            <h3 class="project-title">ShoPacks: Gamified E-Commerce</h3>
+            <p class="project-desc">
+              Won Shopify's internal hackathon with a mini that turns products into collectible trading cards.
+            </p>
+            <div class="project-links">
+              <a href="#" class="project-link">→ GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-story">
+          <div class="project-image">🏀</div>
+          <div class="project-content">
+            <span class="project-type">Machine Learning</span>
+            <h3 class="project-title">NBA Contract Predictor</h3>
+            <p class="project-desc">
+              ML model predicting player salaries to identify the most under/overpaid players in the league.
+            </p>
+            <div class="project-links">
+              <a href="#" class="project-link">→ Demo</a>
+              <a href="#" class="project-link">→ GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-story">
+          <div class="project-image">📄</div>
+          <div class="project-content">
+            <span class="project-type">Web App</span>
+            <h3 class="project-title">LeResume</h3>
+            <p class="project-desc">
+              AI-powered resume and cover letter optimization tailored to each job posting.
+            </p>
+            <div class="project-links">
+              <a href="#" class="project-link">→ Website</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-story">
+          <div class="project-image">💜</div>
+          <div class="project-content">
+            <span class="project-type">Nonprofit</span>
+            <h3 class="project-title">LLS Patient Matching</h3>
+            <p class="project-desc">
+              Platform connecting cancer patients with volunteers at Leukemia & Lymphoma Society.
+            </p>
+            <div class="project-links">
+              <a href="#" class="project-link">→ UW Blueprint</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ EXTRAS (SPORTS, CROSSWORD, CLASSIFIEDS) ============ -->
+    <section class="section" id="sports" style="padding-bottom: 0;">
+      <div class="section-header">
+        <h2 class="section-title">Sports & Diversions</h2>
+        <span class="section-subtitle">The lighter side of the Chronicle</span>
+        <span class="section-page">Section C1</span>
+      </div>
+
+      <div class="extras-grid">
+        <div class="extra-section">
+          <h3 class="extra-title">Sports Desk</h3>
+          <div class="team-row">
+            <span class="team-name">🦬 Buffalo Bills</span>
+            <span class="team-record">13-4</span>
+          </div>
+          <div class="team-row">
+            <span class="team-name">🍁 Maple Leafs</span>
+            <span class="team-record">25-13-2</span>
+          </div>
+          <div class="team-row">
+            <span class="team-name">🐦 Blue Jays</span>
+            <span class="team-record">Offseason</span>
+          </div>
+          <div class="team-row">
+            <span class="team-name">🏎️ Ferrari F1</span>
+            <span class="team-record">P2 WCC</span>
+          </div>
+          <p style="font-size: 0.7rem; font-style: italic; margin-top: 12px; color: var(--ink-faded);">
+            "This is our year" — Leafs fans, every year
+          </p>
+        </div>
+
+        <div class="extra-section">
+          <h3 class="extra-title">Today's Crossword</h3>
+          <div class="mini-crossword">
+            <div class="mini-cell">R</div>
+            <div class="mini-cell">E</div>
+            <div class="mini-cell">A</div>
+            <div class="mini-cell">C</div>
+            <div class="mini-cell">T</div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell">X</div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell">T</div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell">J</div>
+            <div class="mini-cell">S</div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+            <div class="mini-cell black"></div>
+          </div>
+          <p class="clue-mini"><strong>1-A:</strong> Meta's UI library (5)</p>
+          <p class="clue-mini"><strong>2-D:</strong> Vercel's framework (6)</p>
+        </div>
+
+        <div class="extra-section" id="classifieds">
+          <h3 class="extra-title">Classifieds</h3>
+          <div class="classified-mini">
+            <div class="classified-mini-title">Wanted</div>
+            <div>Difficult Problems</div>
+            <div style="color: var(--accent); font-weight: 700;">Inquire Within</div>
+          </div>
+          <div class="classified-mini">
+            <div class="classified-mini-title">Free Coupon</div>
+            <div>One (1) Coffee Chat</div>
+            <div style="font-size: 0.65rem; color: var(--ink-faded);">*while supplies last</div>
+          </div>
+          <div class="classified-mini" style="border-style: dashed;">
+            <div class="classified-mini-title">In Memoriam</div>
+            <div style="font-style: italic;">Bugs Squashed</div>
+            <div style="font-size: 0.65rem;">2022 - 2025</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>© 2025 The Kothari Chronicle</span>
+      <nav class="footer-links">
+        <a href="#">Email</a>
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+      </nav>
+      <span>Printed in California</span>
+    </footer>
+  </div>
+
+  <div class="instructions">
+    <h3>Newspaper V4 - Portfolio Focused</h3>
+    <p>Hero front page introduces you, clear section navigation, experiences/projects get full treatment as news stories, easter eggs tucked into the bottom.</p>
+  </div>
+</body>
+</html>

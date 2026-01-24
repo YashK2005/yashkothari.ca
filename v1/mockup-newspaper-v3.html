@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Kothari Chronicle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --paper: #f4f1e8;
+      --paper-dark: #e8e4d9;
+      --ink: #1a1a1a;
+      --ink-light: #444;
+      --ink-faded: #666;
+      --accent: #8b0000;
+      --rule: #2a2a2a;
+      --bills-blue: #00338D;
+      --bills-red: #C60C30;
+      --leafs-blue: #00205B;
+      --jays-blue: #134A8E;
+      --ferrari-red: #DC0000;
+    }
+    
+    body {
+      font-family: 'Libre Baskerville', 'Georgia', serif;
+      background: #d4d0c4;
+      color: var(--ink);
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .newspaper {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: var(--paper);
+      box-shadow: 
+        0 0 0 1px rgba(0,0,0,0.1),
+        0 20px 60px rgba(0,0,0,0.3),
+        inset 0 0 80px rgba(0,0,0,0.03);
+      position: relative;
+    }
+
+    .newspaper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    /* ============ MASTHEAD ============ */
+    .masthead {
+      text-align: center;
+      padding: 20px 40px 16px;
+      border-bottom: 2px solid var(--ink);
+      position: relative;
+    }
+
+    .masthead-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faded);
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-family: 'Old Standard TT', serif;
+      font-size: 0.85rem;
+    }
+
+    .masthead-title {
+      font-family: 'UnifrakturMaguntia', 'Old English Text MT', serif;
+      font-size: 4.5rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin: 12px 0;
+    }
+
+    .masthead-subtitle {
+      font-family: 'Old Standard TT', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--ink-light);
+      letter-spacing: 0.15em;
+    }
+
+    .masthead-ornament {
+      margin: 12px auto;
+      font-size: 1.2rem;
+      letter-spacing: 0.5em;
+      color: var(--ink-faded);
+    }
+
+    .masthead-meta {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid var(--ink);
+      margin-top: 12px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ============ NAV ============ */
+    .nav-bar {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 10px 0;
+      border-bottom: 3px double var(--ink);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .nav-bar a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-bar a:hover {
+      color: var(--accent);
+    }
+
+    /* ============ MAIN CONTENT ============ */
+    .content {
+      display: grid;
+      grid-template-columns: 180px 1fr 200px;
+      min-height: 600px;
+    }
+
+    /* Left Sidebar */
+    .sidebar-left {
+      border-right: 1px solid var(--ink);
+      padding: 16px;
+      font-size: 0.8rem;
+    }
+
+    .sidebar-section {
+      margin-bottom: 20px;
+    }
+
+    .sidebar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-list {
+      list-style: none;
+      font-size: 0.75rem;
+      line-height: 1.8;
+    }
+
+    .sidebar-list a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .sidebar-list a:hover {
+      color: var(--accent);
+    }
+
+    .weather-widget {
+      background: var(--paper-dark);
+      padding: 12px;
+      text-align: center;
+      font-size: 0.75rem;
+      border: 1px solid var(--ink-faded);
+    }
+
+    .weather-location {
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .weather-temp {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .weather-icon {
+      font-size: 1.5rem;
+      margin: 4px 0;
+    }
+
+    .weather-desc {
+      font-style: italic;
+      color: var(--ink-faded);
+    }
+
+    .coupon {
+      border: 2px dashed var(--ink);
+      padding: 12px;
+      text-align: center;
+      margin-top: 12px;
+      background: var(--paper);
+    }
+
+    .coupon-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .coupon-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* Main Column */
+    .main-column {
+      padding: 20px;
+      column-count: 2;
+      column-gap: 24px;
+      column-rule: 1px solid var(--ink);
+    }
+
+    .headline-article {
+      column-span: all;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .kicker {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .main-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .deck {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--ink-light);
+      max-width: 600px;
+      margin: 0 auto 12px;
+    }
+
+    .byline {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-faded);
+    }
+
+    .article {
+      break-inside: avoid;
+      margin-bottom: 20px;
+    }
+
+    .article-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .article p {
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+
+    .drop-cap {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      line-height: 0.8;
+      padding-right: 8px;
+      padding-top: 4px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .article-image {
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: white;
+      font-weight: 700;
+    }
+
+    .caption {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: var(--ink-faded);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .pull-quote {
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      padding: 16px 0;
+      margin: 16px 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* Right Sidebar */
+    .sidebar-right {
+      border-left: 1px solid var(--ink);
+      padding: 16px;
+      font-size: 0.8rem;
+    }
+
+    .obituary-box {
+      border: 1px solid var(--ink);
+      padding: 12px;
+      margin-bottom: 16px;
+      background: var(--paper-dark);
+    }
+
+    .obituary-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--ink-faded);
+      padding-bottom: 6px;
+    }
+
+    /* ============ SPORTS SECTION ============ */
+    .sports-section {
+      border-top: 3px double var(--ink);
+      padding: 20px;
+    }
+
+    .sports-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sports-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sports-subtitle {
+      font-style: italic;
+      color: var(--ink-faded);
+      font-size: 0.85rem;
+    }
+
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .team-card {
+      border: 2px solid var(--ink);
+      padding: 16px;
+      text-align: center;
+      background: var(--paper);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .team-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .team-logo {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    .team-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .team-league {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-faded);
+      margin-bottom: 8px;
+    }
+
+    .team-record {
+      font-family: 'Old Standard TT', serif;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .team-status {
+      font-size: 0.7rem;
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .team-card.bills { border-color: var(--bills-blue); }
+    .team-card.bills .team-name { color: var(--bills-blue); }
+    
+    .team-card.leafs { border-color: var(--leafs-blue); }
+    .team-card.leafs .team-name { color: var(--leafs-blue); }
+    
+    .team-card.jays { border-color: var(--jays-blue); }
+    .team-card.jays .team-name { color: var(--jays-blue); }
+    
+    .team-card.ferrari { border-color: var(--ferrari-red); }
+    .team-card.ferrari .team-name { color: var(--ferrari-red); }
+
+    /* ============ CROSSWORD SECTION ============ */
+    .crossword-section {
+      border-top: 3px double var(--ink);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+    }
+
+    .crossword-header {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .crossword-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .crossword-subtitle {
+      font-style: italic;
+      color: var(--ink-faded);
+      font-size: 0.85rem;
+    }
+
+    .crossword-grid-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .crossword-grid {
+      display: grid;
+      grid-template-columns: repeat(8, 36px);
+      grid-template-rows: repeat(8, 36px);
+      gap: 0;
+      border: 2px solid var(--ink);
+    }
+
+    .crossword-cell {
+      border: 1px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      position: relative;
+      background: var(--paper);
+    }
+
+    .crossword-cell.black {
+      background: var(--ink);
+    }
+
+    .crossword-cell .cell-number {
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      font-size: 0.55rem;
+      font-weight: 400;
+      color: var(--ink-faded);
+    }
+
+    .crossword-clues {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .clues-column h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    .clue {
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .clue-number {
+      font-weight: 700;
+    }
+
+    /* ============ CLASSIFIEDS ============ */
+    .classifieds {
+      border-top: 3px double var(--ink);
+      padding: 20px;
+    }
+
+    .classifieds-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .classifieds-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .classifieds-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .classified-ad {
+      border: 2px solid var(--ink);
+      padding: 12px;
+      text-align: center;
+      font-size: 0.75rem;
+      background: var(--paper-dark);
+    }
+
+    .classified-ad.featured {
+      border-width: 3px;
+      background: var(--paper);
+    }
+
+    .ad-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .ad-subtitle {
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+
+    .ad-price {
+      font-family: 'Old Standard TT', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      border-top: 3px double var(--ink);
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .instructions {
+      background: #fff8e7;
+      padding: 30px;
+      text-align: center;
+      margin: 40px;
+      border: 1px solid #e0d5c0;
+    }
+
+    .instructions h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="newspaper">
+    <!-- Masthead -->
+    <header class="masthead">
+      <div class="masthead-top">
+        <span class="price">Price: Two Bits</span>
+        <span>Est. 2022</span>
+        <span>San Francisco, CA</span>
+      </div>
+      <h1 class="masthead-title">The Kothari Chronicle</h1>
+      <p class="masthead-subtitle">"All the Code That's Fit to Ship"</p>
+      <div class="masthead-ornament">~ Recipe ~</div>
+      <div class="masthead-meta">
+        <span>Vol. III, No. 26</span>
+        <span>Sunday, January 12th, 2025</span>
+        <span>Final Edition</span>
+      </div>
+    </header>
+
+    <nav class="nav-bar">
+      <a href="#experience">Employment</a>
+      <a href="#projects">Ventures</a>
+      <a href="#sports">Athletics</a>
+      <a href="#classifieds">Classifieds</a>
+      <a href="#contact">Correspondence</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Left Sidebar -->
+      <aside class="sidebar-left">
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">This Week</h3>
+          <ul class="sidebar-list">
+            <li><a href="#">Editorial News</a></li>
+            <li><a href="#">Top Headlines</a></li>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Classifieds</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Weather</h3>
+          <div class="weather-widget">
+            <div class="weather-location">San Francisco, CA</div>
+            <div class="weather-icon">⛅</div>
+            <div class="weather-temp">58°F</div>
+            <div class="weather-desc">Partly Cloudy</div>
+            <div style="font-size: 0.65rem; margin-top: 6px; color: var(--ink-faded);">
+              H: 62° L: 51°
+            </div>
+          </div>
+        </div>
+
+        <div class="coupon">
+          <div class="coupon-title">Coupon</div>
+          <div class="coupon-value">FREE</div>
+          <div style="font-size: 0.7rem;">One (1) Coffee Chat</div>
+          <div style="font-size: 0.6rem; color: var(--ink-faded); margin-top: 4px;">*Subject to availability</div>
+        </div>
+      </aside>
+
+      <!-- Main Column -->
+      <main class="main-column">
+        <article class="headline-article">
+          <span class="kicker">Breaking News from Silicon Valley</span>
+          <h1 class="main-headline">Local Engineer Joins Vercel, <br>Vows to "Ship Fast and Break Nothing"</h1>
+          <p class="deck">From the halls of UWaterloo to the forefront of web infrastructure, one developer's relentless pursuit of elegant solutions</p>
+          <p class="byline">Special Correspondent • Technology Desk</p>
+        </article>
+
+        <article class="article">
+          <div class="article-image">YK</div>
+          <p class="caption">Mr. Kothari, photographed at his workstation</p>
+          <p><span class="drop-cap">I</span>n a move that has sent ripples through the technology sector, Yash Kothari, a promising young engineer from the University of Waterloo, has accepted a position at Vercel, the renowned web deployment platform.</p>
+          <p>The appointment marks the latest chapter in what observers are calling a "meteoric rise" through the ranks of Silicon Valley's most prestigious firms.</p>
+        </article>
+
+        <article class="article">
+          <h2 class="article-headline">Previous Tenure at SeatGeek Yields Remarkable Results</h2>
+          <p><span class="drop-cap">D</span>uring his time with the Catalog team at SeatGeek, Mr. Kothari distinguished himself through his work scaling the Seat Perks program to venues nationwide.</p>
+          <p>"The man simply ships," remarked one colleague, speaking on condition of anonymity. "Baseball games, Broadway shows—he experienced them all while somehow delivering exceptional code."</p>
+        </article>
+
+        <div class="pull-quote">
+          "I enjoy building products that help people and working on difficult problems."
+        </div>
+
+        <article class="article">
+          <h2 class="article-headline">Shopify Security Triumph: AI Platform Wins Hackathon</h2>
+          <p><span class="drop-cap">T</span>he Security organization at Shopify witnessed something extraordinary when Mr. Kothari led development of an AI-powered intelligence platform featuring semantic search and RAG capabilities.</p>
+          <p>The project earned top honors at an internal competition, cementing his reputation as an innovator.</p>
+        </article>
+
+        <article class="article">
+          <h2 class="article-headline">Running Journal Application Reaches Global Audience</h2>
+          <p>In perhaps his most personal venture, an iOS application for tracking running workouts has attracted over 1,000 athletes across 70 countries.</p>
+          <p>Built with Swift and SwiftUI, the application represents Mr. Kothari's commitment to helping people achieve their fitness goals.</p>
+        </article>
+      </main>
+
+      <!-- Right Sidebar -->
+      <aside class="sidebar-right">
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Employment Record</h3>
+          <div style="font-size: 0.75rem;">
+            <div style="margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dotted var(--ink-faded);">
+              <strong>2025</strong><br>
+              Vercel<br>
+              <em>Software Engineer</em>
+            </div>
+            <div style="margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dotted var(--ink-faded);">
+              <strong>2025</strong><br>
+              SeatGeek<br>
+              <em>Software Engineer</em>
+            </div>
+            <div style="margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dotted var(--ink-faded);">
+              <strong>2025</strong><br>
+              Shopify<br>
+              <em>Software Engineer</em>
+            </div>
+            <div style="margin-bottom: 8px;">
+              <strong>2024</strong><br>
+              Nest Wallet<br>
+              <em>Software Engineer</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="obituary-box">
+          <h4 class="obituary-title">In Memoriam</h4>
+          <p style="font-size: 0.75rem; font-style: italic; text-align: center;">
+            Bugs Squashed<br>
+            2022 - 2025<br><br>
+            "They never ran correctly,<br>but they ran."
+          </p>
+        </div>
+
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Education</h3>
+          <p style="font-size: 0.75rem;">
+            <strong>University of Waterloo</strong><br>
+            Computer Science<br>
+            Class of 2026
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Sports Section -->
+    <section class="sports-section" id="sports">
+      <div class="sports-header">
+        <h2 class="sports-title">Sports Desk</h2>
+        <p class="sports-subtitle">Following the teams that matter</p>
+      </div>
+      <div class="teams-grid">
+        <div class="team-card bills">
+          <div class="team-logo">🦬</div>
+          <div class="team-name">Buffalo Bills</div>
+          <div class="team-league">NFL • AFC East</div>
+          <div class="team-record">13-4</div>
+          <div class="team-status">Playoff Bound</div>
+        </div>
+        <div class="team-card leafs">
+          <div class="team-logo">🍁</div>
+          <div class="team-name">Toronto Maple Leafs</div>
+          <div class="team-league">NHL • Atlantic</div>
+          <div class="team-record">25-13-2</div>
+          <div class="team-status">This is our year... right?</div>
+        </div>
+        <div class="team-card jays">
+          <div class="team-logo">🐦</div>
+          <div class="team-name">Toronto Blue Jays</div>
+          <div class="team-league">MLB • AL East</div>
+          <div class="team-record">—</div>
+          <div class="team-status">Spring Training Soon</div>
+        </div>
+        <div class="team-card ferrari">
+          <div class="team-logo">🏎️</div>
+          <div class="team-name">Scuderia Ferrari</div>
+          <div class="team-league">Formula 1</div>
+          <div class="team-record">P2 Constructors</div>
+          <div class="team-status">Next Year™</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Crossword Section -->
+    <section class="crossword-section">
+      <div class="crossword-header">
+        <h2 class="crossword-title">The Daily Crossword</h2>
+        <p class="crossword-subtitle">A puzzle for the technically inclined</p>
+      </div>
+      
+      <div class="crossword-grid-container">
+        <div class="crossword-grid">
+          <!-- Row 1 -->
+          <div class="crossword-cell"><span class="cell-number">1</span>N</div>
+          <div class="crossword-cell">E</div>
+          <div class="crossword-cell">X</div>
+          <div class="crossword-cell">T</div>
+          <div class="crossword-cell">J</div>
+          <div class="crossword-cell">S</div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <!-- Row 2 -->
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell"><span class="cell-number">2</span>Y</div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell">W</div>
+          <div class="crossword-cell">I</div>
+          <div class="crossword-cell">F</div>
+          <!-- Row 3 -->
+          <div class="crossword-cell"><span class="cell-number">3</span>R</div>
+          <div class="crossword-cell">E</div>
+          <div class="crossword-cell">A</div>
+          <div class="crossword-cell">C</div>
+          <div class="crossword-cell">T</div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell">T</div>
+          <!-- Row 4 -->
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell"><span class="cell-number">4</span>P</div>
+          <div class="crossword-cell">I</div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <!-- Row 5 -->
+          <div class="crossword-cell"><span class="cell-number">5</span>V</div>
+          <div class="crossword-cell">E</div>
+          <div class="crossword-cell">R</div>
+          <div class="crossword-cell">C</div>
+          <div class="crossword-cell">E</div>
+          <div class="crossword-cell">L</div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <!-- Row 6 -->
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <!-- Row 7 -->
+          <div class="crossword-cell"><span class="cell-number">6</span>G</div>
+          <div class="crossword-cell">I</div>
+          <div class="crossword-cell">T</div>
+          <div class="crossword-cell">H</div>
+          <div class="crossword-cell">U</div>
+          <div class="crossword-cell">B</div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <!-- Row 8 -->
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+          <div class="crossword-cell black"></div>
+        </div>
+      </div>
+
+      <div class="crossword-clues">
+        <div class="clues-column">
+          <h4>Across</h4>
+          <div class="clue"><span class="clue-number">1.</span> Vercel's React framework (6)</div>
+          <div class="clue"><span class="clue-number">3.</span> Popular UI library from Meta (5)</div>
+          <div class="clue"><span class="clue-number">5.</span> Current employer, deploys the web (6)</div>
+          <div class="clue"><span class="clue-number">6.</span> Where code goes to live (6)</div>
+        </div>
+        <div class="clues-column">
+          <h4>Down</h4>
+          <div class="clue"><span class="clue-number">2.</span> TypeScript is a ___ of JS (8)</div>
+          <div class="clue"><span class="clue-number">4.</span> 3.14159... or a Raspberry ___ (2)</div>
+          <div class="clue"><span class="clue-number">2.</span> Swift framework for Apple (5)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Classifieds -->
+    <section class="classifieds">
+      <div class="classifieds-header">
+        <h2 class="classifieds-title">Classifieds & Advertisements</h2>
+      </div>
+      <div class="classifieds-grid">
+        <div class="classified-ad featured">
+          <div class="ad-title">Wanted</div>
+          <div class="ad-subtitle">Difficult Problems</div>
+          <p>Seeking complex challenges in web development, ML, and distributed systems. No problem too hard.</p>
+          <div class="ad-price">Inquire Within</div>
+        </div>
+        <div class="classified-ad">
+          <div class="ad-title">For Sale</div>
+          <div class="ad-subtitle">Legacy Code</div>
+          <p>Slightly used. Works on my machine. Buyer assumes all technical debt.</p>
+          <div class="ad-price">FREE*</div>
+        </div>
+        <div class="classified-ad">
+          <div class="ad-title">Services</div>
+          <div class="ad-subtitle">Code Review</div>
+          <p>Professional nitpicking. Will find bugs you didn't know existed.</p>
+          <div class="ad-price">Reasonable Rates</div>
+        </div>
+        <div class="classified-ad">
+          <div class="ad-title">Lost & Found</div>
+          <div class="ad-subtitle">Missing: Sleep</div>
+          <p>Last seen during hackathon. If found, please return to owner immediately.</p>
+          <div class="ad-price">REWARD</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>© 2025 The Kothari Chronicle</span>
+      <nav class="footer-links">
+        <a href="#">Email the Editor</a>
+        <a href="#">GitHub Archives</a>
+        <a href="#">LinkedIn Society</a>
+        <a href="#">Twitter Wire</a>
+      </nav>
+      <span>Printed in California</span>
+    </footer>
+  </div>
+
+  <div class="instructions">
+    <h3>Newspaper V3</h3>
+    <p>Updated: SF weather, real sports teams (Bills, Leafs, Jays, Ferrari), bigger crossword, removed stock ticker and horoscope.</p>
+  </div>
+</body>
+</html>
