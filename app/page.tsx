@@ -57,7 +57,9 @@ export default function Home() {
             <p className="pt-4">
               <span className="text-[#6b7280]">$</span>{" "}
               <span className="text-[#3b82f6]">history</span>{" "}
-              <span className="text-[#6b7280]">--work</span>
+              <span className="text-[#6b7280]">|</span>{" "}
+              <span className="text-[#3b82f6]">grep</span>{" "}
+              <span className="text-[#6b7280]">work</span>
             </p>
             <div className="pl-4 border-l-2 border-[#1f1f1f] space-y-2">
               <p className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#1a1a1a] hover:translate-x-1 group">
