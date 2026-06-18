@@ -43,9 +43,9 @@ export default function Home() {
               <span className="text-[#3b82f6]">whoami</span>
             </p>
             <p className="pl-4 border-l-2 border-[#1f1f1f]">
-              I'm currently building CDN Infrastructure at{" "}
-              <Link href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#3b82f6] transition-colors border-b border-[#333] hover:border-[#3b82f6]">
-                Vercel
+              I'm currently building reliable AI agents for some of the world's largest companies at{" "}
+              <Link href="https://scale.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#3b82f6] transition-colors border-b border-[#333] hover:border-[#3b82f6]">
+                Scale AI
               </Link>
               {" "}and studying CS at{" "}
               <Link href="https://uwaterloo.ca" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#3b82f6] transition-colors border-b border-[#333] hover:border-[#3b82f6]">
@@ -64,20 +64,51 @@ export default function Home() {
             <div className="pl-4 border-l-2 border-[#1f1f1f] space-y-2">
               <p className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#1a1a1a] hover:translate-x-1 group">
                 <span className="text-[#6b7280] group-hover:text-[#3b82f6] transition-colors">[0]</span>{" "}
+                Frontier Agents Engineering — building agents the world's largest companies rely on @{" "}
+                <Link href="https://scale.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#3b82f6] transition-colors">
+                  Scale AI
+                </Link>
+              </p>
+              <div className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#1a1a1a] hover:translate-x-1 group">
+                <p>
+                  <span className="text-[#6b7280] group-hover:text-[#3b82f6] transition-colors">[1]</span>{" "}
+                  Built CDN infrastructure serving millions of sites @{" "}
+                  <Link href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#3b82f6] transition-colors">
+                    Vercel
+                  </Link>
+                </p>
+                <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 pl-7 text-xs text-[#6b7280]">
+                  <span className="text-[#3b82f6]">↳ shipped</span>
+                  <Link href="https://vercel.com/changelog/create-vercel-waf-custom-rules-using-natural-language" target="_blank" rel="noopener noreferrer" className="border-b border-[#333] transition-colors hover:border-[#3b82f6] hover:text-white">
+                    create Firewall rules with natural language
+                  </Link>
+                  <Link href="https://vercel.com/changelog/manage-vercel-firewall-in-the-cli" target="_blank" rel="noopener noreferrer" className="group/cmd border-b border-[#333] transition-colors hover:border-[#3b82f6] hover:text-white">
+                    <code className="rounded bg-[#1f1f1f] px-1.5 py-0.5 text-[#e0e0e0] group-hover/cmd:text-white">vercel firewall</code> CLI command
+                  </Link>
+                  <Link href="https://vercel.com/changelog/vercels-cdn-gets-a-new-dashboard-experience" target="_blank" rel="noopener noreferrer" className="border-b border-[#333] transition-colors hover:border-[#3b82f6] hover:text-white">
+                    new CDN dashboard experience
+                  </Link>
+                  <Link href="https://vercel.com/changelog/vercels-cdn-now-supports-updating-routing-rules-without-a-new-deployment" target="_blank" rel="noopener noreferrer" className="border-b border-[#333] transition-colors hover:border-[#3b82f6] hover:text-white">
+                    update routing rules without redeploys
+                  </Link>
+                </p>
+              </div>
+              <p className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#1a1a1a] hover:translate-x-1 group">
+                <span className="text-[#6b7280] group-hover:text-[#3b82f6] transition-colors">[2]</span>{" "}
                 Worked on catalog systems and Seat Perks @{" "}
                 <Link href="https://seatgeek.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#3b82f6] transition-colors">
                   SeatGeek
                 </Link>
               </p>
               <p className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#1a1a1a] hover:translate-x-1 group">
-                <span className="text-[#6b7280] group-hover:text-[#3b82f6] transition-colors">[1]</span>{" "}
+                <span className="text-[#6b7280] group-hover:text-[#3b82f6] transition-colors">[3]</span>{" "}
                 Built cutting-edge AI-powered security tools @{" "}
                 <Link href="https://shopify.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#3b82f6] transition-colors">
                   Shopify
                 </Link>
               </p>
               <p className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#1a1a1a] hover:translate-x-1 group">
-                <span className="text-[#6b7280] group-hover:text-[#3b82f6] transition-colors">[2]</span>{" "}
+                <span className="text-[#6b7280] group-hover:text-[#3b82f6] transition-colors">[4]</span>{" "}
                 Enabled trading of over 8M EVM and Solana tokens @{" "}
                 <Link href="https://x.com/nestwalletxyz" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#3b82f6] transition-colors">
                   Nest Wallet
