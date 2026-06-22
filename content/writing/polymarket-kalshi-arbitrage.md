@@ -1,7 +1,7 @@
 ---
 title: Finding free money between Kalshi and Polymarket
 author: Yash Kothari
-date: 2026-06-18
+date: 2026-06-22
 description: The challenges I faced when building arb-finder, a system that finds real, risk-free arbitrage between Kalshi and Polymarket.
 ---
 
@@ -63,17 +63,15 @@ I send each candidate pair to `gpt-5.4-mini` to determine whether both would alw
 
 The first version of my prompt produced many false positives I would have lost real money on if I hadn't verified the resolution rules myself. The current version is more detailed and precise, and produces around 800 confirmed pairs with a top-arbs list I trust enough to put my own money on.
 
-What changed across those revisions was a long list of specific failure modes I caught by eyeballing the top of the dashboard. For example, the system produced a 14% "arb" on the 2026 CA-11 primary. Kalshi had Connie Chan on the YES side of "who will win the 2026 CA-11 primary?", with rules text reading *if Connie Chan advances in the 2026 CA-11 primary*. Polymarket asked "Will Connie Chan receive the most votes in the CA-11 primary?". The model read both, saw "primary" on each side, and confirmed with this note:
+What changed across those revisions was a long list of specific failure modes I caught by eyeballing the top of the dashboard. For example, the system flagged a 14% "arb" on the 2026 CA-11 primary. The two markets looked identical but resolved on different criteria: Kalshi paid out if Connie Chan *advanced*; Polymarket paid out if she got the *most votes*. The model saw the same race and candidate on both sides and called them equivalent:
 
 > Same district, same primary, same candidate. Polymarket's "most votes" phrasing is functionally equivalent to Kalshi's "advances" wording in this context.
 
-That note is wrong, and the 14% arb is a coin flip on Chan placing first. California uses a top-2 jungle primary, where the candidate with the second-most votes also advances. A second-place finish for Chan settles YES on Kalshi (advances) and NO on Polymarket (didn't get the most votes). The model read both rules texts, didn't notice the asymmetry, and gave me confident prose explaining why I should trust it.
+It isn't. California uses a top-2 jungle primary, so the *second*-place finisher advances too. If Chan comes in second, Kalshi settles YES (she advanced) while Polymarket settles NO (she didn't win) — the markets only agree when she finishes first. The "arb" was really just a bet on Chan placing first, dressed up with a confident, wrong paragraph of model reasoning.
 
-The fix was easy once I saw it: a rule explaining top-2 jungle systems and forbidding "advances" and "wins" from being treated as interchangeable. But giving every new edge case its own paragraph bloated the system prompt, and every prompt modification risked regressing something I'd already gotten right. 
+The fix was one rule: in a jungle primary, "advances" and "wins" aren't interchangeable. But every edge case like this added another paragraph to the system prompt, and every change risked regressing something that already worked. 
 
 ## An eval suite
-
-At one point it seemed that every time I added a rule to fix a false positive, two old true positives would flip into "flagged" by accident. I'd tighten a timing rule to catch a false positive, and suddenly an unrelated Alaska Senate race would start showing up as flagged for no reason. 
 
 For me, there were two error types, each with its own price:
 
