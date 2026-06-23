@@ -50,9 +50,9 @@ export default function Home() {
               <Link href="https://scale.com/genai-platform" target="_blank" rel="noopener noreferrer" className="text-[#2563eb] font-medium hover:text-[#1d4ed8] transition-colors border-b border-[#d8d5cc] hover:border-[#2563eb]">
                 Scale AI
               </Link>
-              {" "}and studying CS at{" "}
+              {" "}and studying Computer Science at the{" "}
               <Link href="https://uwaterloo.ca" target="_blank" rel="noopener noreferrer" className="text-[#2563eb] font-medium hover:text-[#1d4ed8] transition-colors border-b border-[#d8d5cc] hover:border-[#2563eb]">
-                Waterloo
+                University of Waterloo
               </Link>
               .
             </p>
