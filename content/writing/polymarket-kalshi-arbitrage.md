@@ -80,9 +80,9 @@ For me, there were two error types, each with its own price:
 
 Given that this was a quick project, at first I skipped the eval suite and relied on vibes plus manual review, but after several hours of iteration I realized I was wasting too much time on something that could be trivially automated.
 
-I started building an eval suite. Every false positive I caught in production got added as a "must flag/reject" case. Every false negative I noticed during manual review got added as a "must confirm" case. The iPhone successor case, the Starmer subset window, the CPI threshold mismatch, and the Mexico-Draw polarity bait all got added to the suite the first time I caught them. The suite started with the original 15 worst offenders and now sits at around 60 hand-curated pairs.
+I started building an eval suite. Every false positive I caught in production got added as a "must flag/reject" case. Every false negative I noticed during manual review got added as a "must confirm" case. The suite started with the original 15 worst offenders and now sits at around 60 hand-curated pairs.
 
-Before any prompt change ships, I run the suite. The script just calls the same `confirm_pair` function on each labeled case and checks whether the verdict matches the expected one. A new rule has to maintain the current passing rate (right now around 95%) and improve at least one previously-failing case. Anything else is a regression and gets rejected, even if I'm subjectively sure the rule is "right".
+Before any prompt change ships, I run the suite. A new rule has to maintain the current passing rate (right now around 95%) and improve at least one previously-failing case. Anything else is a regression and gets rejected, even if I'm subjectively sure the rule is "right".
 
 What changed once the eval suite existed is that I could finally start being aggressive about adding rules without paranoid hand-testing every previously-known-good market. The cost of a prompt iteration dropped from manual verification and hopes to a cheap script that ran in under a minute.
 
