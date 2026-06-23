@@ -75,7 +75,7 @@ The fix was one rule: in a jungle primary, "advances" and "wins" aren't intercha
 
 For me, there were two error types, each with its own price:
 
-- **False positives** (confirming a pair that isn't actually an arb) are the dangerous ones. They show up on my dashboard with a big number, and if I trust it without verifying, I lose money. I have zero tolerance for these errors.
+- **False positives** (confirming a pair that isn't actually an arb) are the dangerous ones. They show up on my dashboard, and if I trust it without verifying, I could lose money. I have zero tolerance for these errors.
 - **False negatives** (flagging or rejecting a pair that is actually a clean arb) are the silent ones. I never see them in my dashboard, but they lower the size of my opportunity set. However, since I would never trade on them, there is no monetary downside to these errors. Tolerance: some, but not unlimited, because every legit arb I miss is free money I could have made.
 
 Given that this was a quick project, at first I skipped the eval suite and relied on vibes plus manual review, but after several hours of iteration I realized I was wasting too much time on something that could be trivially automated.
