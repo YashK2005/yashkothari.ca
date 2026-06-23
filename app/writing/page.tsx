@@ -7,7 +7,6 @@ const SERIF = "'Charter','Bitstream Charter','Sitka Text',Cambria,Georgia,serif"
 
 export const metadata: Metadata = {
   title: "Writing — Yash Kothari",
-  description: "Occasional notes and essays.",
 };
 
 export default async function WritingIndex() {
@@ -25,9 +24,6 @@ export default async function WritingIndex() {
           >
             Writing
           </h1>
-          <p className="mt-2 font-mono text-sm text-[#8a8a85]">
-            Occasional notes and essays.
-          </p>
         </header>
 
         <ul className="mt-10 space-y-8">

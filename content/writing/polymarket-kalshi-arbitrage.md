@@ -67,7 +67,7 @@ What changed across those revisions was a long list of specific failure modes I 
 
 > Same district, same primary, same candidate. Polymarket's "most votes" phrasing is functionally equivalent to Kalshi's "advances" wording in this context.
 
-It isn't. California uses a top-2 jungle primary, so the *second*-place finisher advances too. If Chan comes in second, Kalshi settles YES (she advanced) while Polymarket settles NO (she didn't win) — the markets only agree when she finishes first. The "arb" was really just a bet on Chan placing first, dressed up with a confident, wrong paragraph of model reasoning.
+It isn't. California uses a top-2 jungle primary, so the *second*-place finisher advances too. If Chan comes in second, Kalshi settles YES (she advanced) while Polymarket settles NO (she didn't win). The markets only agree when she finishes first. The "arb" was really just a bet on Chan placing first, dressed up with a confident, wrong paragraph of model reasoning.
 
 The fix was one rule: in a jungle primary, "advances" and "wins" aren't interchangeable. But every edge case like this added another paragraph to the system prompt, and every change risked regressing something that already worked. 
 

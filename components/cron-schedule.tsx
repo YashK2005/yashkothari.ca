@@ -18,7 +18,7 @@ const JOBS = [
       "Fetch live bid/ask for all confirmed pairs",
       "Compute whether an arb is open and its return",
       "Materialize into the live_arbs_current view",
-      "Dashboard reads the view — refresh ≤ 2 min",
+      "Dashboard reads the view, refresh ≤ 2 min",
     ],
   },
 ];
