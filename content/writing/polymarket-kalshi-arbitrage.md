@@ -16,7 +16,7 @@ If you find two markets that resolve to the same real-world outcome, there are t
 ```hedge-directions
 ```
 
-In every possible outcome, exactly one of the two contracts in the pair pays \$1 and the other pays \$0. So the per-pair payout is always \$1. If the combined cost of `K_yes_ask + P_no_ask` or `P_yes_ask + K_no_ask` is less than \$1, you have an arbitrage.
+In every possible outcome, exactly one of the two contracts in the pair pays \$1 and the other pays \$0. So the per-pair payout is always \$1. If the combined cost of `Kalshi_yes + Polymarket_no` or `Polymarket_yes + Kalshi_no` is less than \$1, you have an arbitrage.
 
 As a concrete example: say for "Will the Knicks win the 2026 NBA finals?", Kalshi YES costs 47¢ and Polymarket NO costs 40¢. You buy both for a total of 87¢, and get paid \$1 in every possible outcome (Kalshi YES pays \$1 if the Knicks win the championship, Polymarket NO pays \$1 if they don't). That's a risk-free 13¢ arb per dollar staked regardless of whether the Knicks win or lose.
 

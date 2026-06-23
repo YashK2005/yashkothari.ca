@@ -5,8 +5,8 @@ const DIRECTIONS = [
       { action: "Buy YES", venue: "Kalshi", side: "yes" as const },
       { action: "Buy NO", venue: "Polymarket", side: "no" as const },
     ],
-    cost: "K_yes_ask + P_no_ask",
-    profit: "1 − (K_yes_ask + P_no_ask)",
+    cost: "Kalshi_yes + Polymarket_no",
+    profit: "1 − (Kalshi_yes + Polymarket_no)",
   },
   {
     n: 2,
@@ -14,8 +14,8 @@ const DIRECTIONS = [
       { action: "Buy YES", venue: "Polymarket", side: "yes" as const },
       { action: "Buy NO", venue: "Kalshi", side: "no" as const },
     ],
-    cost: "P_yes_ask + K_no_ask",
-    profit: "1 − (P_yes_ask + K_no_ask)",
+    cost: "Polymarket_yes + Kalshi_no",
+    profit: "1 − (Polymarket_yes + Kalshi_no)",
   },
 ];
 
