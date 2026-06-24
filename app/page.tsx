@@ -145,11 +145,11 @@ export default function Home() {
                 arb-finder
               </Link>
               , a pipeline that finds risk-free arbitrage between Kalshi and Polymarket{" "}
-              <span className="text-[#8a8a85]">(writeup)</span>
+              <span className="text-[#8a8a85]">(<Link href="/writing/polymarket-kalshi-arbitrage" className="hover:text-[#2563eb] transition-colors">writeup</Link>)</span>
             </p>
             <p className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#f0eee7] hover:translate-x-1 group">
               <span className="text-[#8a8a85] group-hover:text-[#2563eb] transition-colors">[2]</span>{" "}
-              Built{" "}
+              Shipped{" "}
               <Link href="https://apps.apple.com/ca/app/running-journal/id6444382884" target="_blank" rel="noopener noreferrer" className="text-[#2563eb] font-medium hover:text-[#1d4ed8] transition-colors">
                 Running Journal
               </Link>
@@ -157,11 +157,11 @@ export default function Home() {
             </p>
             <p className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#f0eee7] hover:translate-x-1 group">
               <span className="text-[#8a8a85] group-hover:text-[#2563eb] transition-colors">[3]</span>{" "}
-              Built{" "}
+              Used classical ML algorithms and supervised learning to create{" "}
               <Link href="https://nba-contract-predictor.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-[#2563eb] font-medium hover:text-[#1d4ed8] transition-colors">
                 NBA Contract Predictor
               </Link>
-              , using classical ML and supervised learning to surface the NBA&apos;s most overpaid and underpaid players
+              , which surfaces the NBA&apos;s most overpaid and underpaid players
             </p>
           </div>
         </section>
@@ -174,7 +174,7 @@ export default function Home() {
             <span className="text-[#8a8a85]">~/.config/interests</span>
           </p>
           <p className="pl-4 border-l-2 border-[#e6e4dd] text-sm md:text-base text-[#3f3f3f]">
-            I enjoy building{" "}
+            I enjoy creating{" "}
             <Link href="https://uwblueprint.org" target="_blank" rel="noopener noreferrer" className="text-[#2563eb] font-medium hover:text-[#1d4ed8] transition-colors">
               products that help people
             </Link>
