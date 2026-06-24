@@ -1,7 +1,7 @@
 ---
 title: Finding free money between Kalshi and Polymarket
 author: Yash Kothari
-date: 2026-06-22
+date: 2026-06-24
 description: The challenges I faced when building arb-finder, a system that finds real, risk-free arbitrage between Kalshi and Polymarket.
 ---
 
@@ -117,7 +117,7 @@ Where I am as of writing:
 - ~10,000 candidate pairs after the Pinecone semantic-similarity step
 - ~800 confirmed pairs after the LLM classifier
 - ~50 genuine arbitrage opportunities
-- 7 active arbitrages over 5% profit per dollar right now, the highest current opportunity is 16%
+- 9 active arbitrages over 5% profit per dollar right now, the highest current opportunity is 21%
 - One arb opportunity of over 20% that I bought into a few weeks ago, which resolved a couple days ago and paid for this month's Claude and Codex subscriptions, plus a couple ice cream scoops from Swensen's.
 
 The dashboard runs on its own, refreshes every couple of minutes, and the only thing standing between it and a fully autonomous trading bot is me, two browser tabs, and a habit of double-checking. I'm in no rush to remove that last piece.
