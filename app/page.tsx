@@ -59,10 +59,8 @@ export default function Home() {
 
             <p className="pt-4">
               <span className="text-[#8a8a85]">$</span>{" "}
-              <span className="text-[#2563eb]">history</span>{" "}
-              <span className="text-[#8a8a85]">|</span>{" "}
-              <span className="text-[#2563eb]">grep</span>{" "}
-              <span className="text-[#8a8a85]">work</span>
+              <span className="text-[#2563eb]">cat</span>{" "}
+              <span className="text-[#8a8a85]">~/work</span>
             </p>
             <div className="pl-4 border-l-2 border-[#e6e4dd] space-y-2">
               <p className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#f0eee7] hover:translate-x-1 group">
@@ -126,9 +124,7 @@ export default function Home() {
           <p className="text-sm text-[#8a8a85] mb-4">
             <span>$</span>{" "}
             <span className="text-[#2563eb]">ls</span>{" "}
-            <span className="text-[#8a8a85]">~/projects</span>{" "}
-            <span className="text-[#2563eb]">|</span>{" "}
-            <span className="text-[#8a8a85]">head -4</span>
+            <span className="text-[#8a8a85]">~/projects</span>
           </p>
           <div className="pl-4 border-l-2 border-[#e6e4dd] space-y-2 text-sm md:text-base text-[#3f3f3f]">
             <p className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#f0eee7] hover:translate-x-1 group">
@@ -185,7 +181,7 @@ export default function Home() {
         {/* Links */}
         <footer className="mt-12 animate-[fadeInUp_0.6s_ease-out_0.5s_forwards] opacity-0">
           <p className="text-sm text-[#8a8a85] mb-4">
-            <span>$</span> <span className="text-[#2563eb]">links</span>
+            <span>$</span> <span className="text-[#2563eb]">ls</span> <span className="text-[#8a8a85]">~/links</span>
           </p>
           <div className="flex items-center gap-6">
             <Link href="https://github.com/YashK2005" target="_blank" rel="noopener noreferrer" className="text-[#8a8a85] hover:text-[#2563eb] transition-colors text-sm">
