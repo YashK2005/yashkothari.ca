@@ -8,7 +8,7 @@ export default function Home() {
         <header className="animate-[fadeInUp_0.6s_ease-out_forwards] opacity-0 flex items-center justify-between">
           <h1 className="text-2xl md:text-3xl font-normal tracking-tight text-[#111] flex items-center">
             Yash Kothari
-            <span className="inline-block w-2.5 h-5 bg-[#2563eb] ml-1 animate-pulse" />
+            <span className="hidden sm:inline-block w-2.5 h-5 bg-[#2563eb] ml-1 animate-pulse" />
           </h1>
           <div className="flex items-center gap-4">
             <Link href="/writing" className="mr-1 text-sm text-[#8a8a85] hover:text-[#2563eb] transition-colors">
@@ -75,7 +75,7 @@ export default function Home() {
               <div className="py-1 -my-1 px-2 -mx-2 rounded transition-all duration-200 hover:bg-[#f0eee7] hover:translate-x-1 group">
                 <p>
                   <span className="text-[#8a8a85] group-hover:text-[#2563eb] transition-colors">[1]</span>{" "}
-                  Built CDN infrastructure serving millions of sites @{" "}
+                  Built CDN infrastructure and security products serving millions of sites @{" "}
                   <Link href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-[#2563eb] font-medium hover:text-[#1d4ed8] transition-colors">
                     Vercel
                   </Link>
